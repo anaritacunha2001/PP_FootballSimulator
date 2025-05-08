@@ -5,68 +5,90 @@ import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.IFormation;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
-import main.model.Club;
+import main.model.IExtendedPlayer;
 
 import java.io.IOException;
 
-public class Team extends Club implements ITeam{
+public class Team implements ITeam {
 
+    private IClub club; // Referência ao clube base
+    private IFormation formation; // Formação selecionada
+    private IPlayer[] starters; // Jogadores titulares
+    private int starterCount;
 
-    private IFormation formation;
-    private int teamStrength;
-
-    public Team(String name, String country, String code, int foundedYear, String stadiumName, String logo, IPlayer[] iPlayers, int numberOfPlayers, int teamStrength) {
-        super(name, country, code, foundedYear, stadiumName, logo, iPlayers, numberOfPlayers);
+    public Team(IClub club, IFormation formation) {
+        this.club = club;
+        this.formation = formation;
+        this.starters = new IPlayer[11];
+        this.starterCount = 0;
     }
 
-
-    //nao sei como vou dar o getClub
     @Override
     public IClub getClub() {
-        return null;
+        return club;
     }
 
     @Override
     public IFormation getFormation() {
-        return this.formation;
+        return formation;
+    }
+
+    @Override
+    public void setFormation(IFormation formation) {
+        this.formation = formation;
     }
 
     @Override
     public IPlayer[] getPlayers() {
-        return this.iPlayers;
+        return starters;
     }
-
 
     @Override
-    public void addPlayer(IPlayer iPlayer) {
-
+    public void addPlayer(IPlayer player) {
+        if (starterCount < starters.length) {
+            starters[starterCount++] = player;
+        }
     }
 
-    //NAO SEI COMO FAZER
     @Override
-    public int getPositionCount(IPlayerPosition iPlayerPosition) {
-        return 0;
+    public int getPositionCount(IPlayerPosition position) {
+        int count = 0;
+        for (int i = 0; i < starterCount; i++) {
+            if (starters[i] != null && starters[i].getPosition().getDescription().equals(position.getDescription())) {
+                count++;
+            }
+        }
+        return count;
     }
 
-    //NAO SEI COMO FAZER
     @Override
-    public boolean isValidPositionForFormation(IPlayerPosition iPlayerPosition) {
-        return false;
+    public boolean isValidPositionForFormation(IPlayerPosition position) {
+        // Simplificação: considera que qualquer posição é válida
+        return true;
     }
 
-    //NAO SEI COMO FAZER
     @Override
     public int getTeamStrength() {
-        return 0;
-    }
+        int total = 0;
+        for (int i = 0; i < starterCount; i++) {
+            if (starters[i] != null) {
+                total += starters[i].getPassing();
+                total += starters[i].getShooting();
+                total += starters[i].getSpeed();
+                total += starters[i].getStamina();
 
-    @Override
-    public void setFormation(IFormation iFormation) {
-        this.formation = iFormation;
+                IExtendedPlayer p = (IExtendedPlayer) starters[i];
+                total += p.getDribbling();
+                total += p.getTackling();
+                total += p.getReflexes();
+            }
+        }
+        return total / starterCount;
     }
 
     @Override
     public void exportToJson() throws IOException {
-
+        System.out.println("{\"club\": \"" + club.getName() + "\", \"formation\": \"" + formation.getDisplayName() + "\"}");
     }
 }
+

@@ -5,8 +5,6 @@ import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
 
-import java.io.IOException;
-
 public class Club implements IClub {
 
     private final int CLUB_DEFAULT_SIZE = 30;
@@ -20,8 +18,7 @@ public class Club implements IClub {
     protected IPlayer[] iPlayers;
     protected int numberOfPlayers;
 
-
-    // NESTE ASSUMIMOS QUE O CLUBE É CRIADO ANTES DA IMPORTAÇAO DOS JOGADORES
+    // NESTE ASSUMIMOS QUE O CLUBE É CRIADO ANTES DA IMPORTAÇÃO DOS JOGADORES
     public Club(String name, String country, String code, int foundedYear, String stadiumName, String logo) {
         this.name = name;
         this.country = country;
@@ -33,7 +30,7 @@ public class Club implements IClub {
         this.numberOfPlayers = 0;
     }
 
-    // NESTE JA RECEBEMOS OS JOGADORES IMPORTADOS E SO CRIAMOS O CLUBE DEPOIS
+    // NESTE JÁ RECEBEMOS OS JOGADORES IMPORTADOS E SÓ CRIAMOS O CLUBE DEPOIS
     public Club(String name, String country, String code, int foundedYear, String stadiumName, String logo, IPlayer[] iPlayers, int numberOfPlayers) {
         this.name = name;
         this.country = country;
@@ -103,7 +100,7 @@ public class Club implements IClub {
     public void removePlayer(IPlayer iPlayer) {
         for (int i = 0; i < iPlayers.length; i++) {
             if (iPlayers[i] == iPlayer) {
-                for (int j = i; j<iPlayers.length; j++) {
+                for (int j = i; j < iPlayers.length - 1; j++) {
                     iPlayers[j] = iPlayers[j + 1];
                 }
                 iPlayers[iPlayers.length - 1] = null;
@@ -118,21 +115,28 @@ public class Club implements IClub {
     }
 
     @Override
-    public IPlayer selectPlayer(IPlayerSelector iPlayerSelector, IPlayerPosition iPlayerPosition) {
-        return null;
+    public IPlayer selectPlayer(IPlayerSelector selector, IPlayerPosition position) {
+        return selector.selectPlayer(this, position);
     }
 
     @Override
     public boolean isValid() {
-        return false;
+        return name != null && !name.isEmpty() &&
+                code != null && !code.isEmpty() &&
+                country != null && !country.isEmpty() &&
+                foundedYear > 1800 &&
+                stadiumName != null && !stadiumName.isEmpty() &&
+                logo != null && !logo.isEmpty() &&
+                numberOfPlayers > 0;
     }
 
     @Override
-    public void exportToJson() throws IOException {
+    public void exportToJson() {
+        System.out.println("{\"name\":\"" + name + "\",\"code\":\"" + code + "\"}");
     }
 
-    private void expandCapacity(){
-        IPlayer[] newArray = new IPlayer[iPlayers.length*2];
+    private void expandCapacity() {
+        IPlayer[] newArray = new IPlayer[iPlayers.length * 2];
         System.arraycopy(iPlayers, 0, newArray, 0, iPlayers.length);
         iPlayers = newArray;
     }

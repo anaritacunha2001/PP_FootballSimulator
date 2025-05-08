@@ -1,6 +1,6 @@
 package io;
 
-import model.Player;
+import main.model.Player;
 import main.model.PlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
 
@@ -11,22 +11,17 @@ import java.time.LocalDate;
 
 public class Importer {
 
-    // Método para importar jogadores de um ficheiro
     public Player[] importarJogadores(String nomeFicheiro) {
         Player[] jogadores = new Player[30];
         int contador = 0;
 
         try {
-            // Acessar o ficheiro diretamente sem "resources/"
             InputStream input = getClass().getClassLoader().getResourceAsStream(nomeFicheiro);
-
-            // Verificar se o ficheiro foi encontrado
             if (input == null) {
                 System.out.println("❌ Erro: ficheiro '" + nomeFicheiro + "' não encontrado.");
-                return new Player[0];  // Retorna um array vazio se não encontrado
+                return new Player[0];
             }
 
-            // Ler o conteúdo do ficheiro
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
             StringBuilder sb = new StringBuilder();
             String linha;
@@ -34,36 +29,44 @@ public class Importer {
             while ((linha = reader.readLine()) != null) {
                 sb.append(linha.trim());
             }
-
             reader.close();
 
-            // Processar o conteúdo JSON
             String conteudo = sb.toString();
             String[] entradas = conteudo.split("\\{");
 
-            // Processar as entradas e extrair informações dos jogadores
             for (int i = 0; i < entradas.length; i++) {
                 if (entradas[i].contains("name")) {
                     String json = "{" + entradas[i];
 
-                    // Extrair campos do JSON
                     String nome = extrairCampo(json, "name");
                     String nascimento = extrairCampo(json, "birthDate");
                     String nacionalidade = extrairCampo(json, "nationality");
-                    String posicao = extrairCampo(json, "basePosition");
+                    String posicao = extrairCampo(json, "position");
                     String foto = extrairCampo(json, "photo");
                     int numero = Integer.parseInt(extrairCampo(json, "number"));
 
-                    // Converter a data de nascimento para LocalDate
                     LocalDate data = LocalDate.parse(nascimento);
-                    // Criar a posição do jogador
                     PlayerPosition pPos = new PlayerPosition(posicao);
-                    // Definir o pé preferido (default é direito)
                     PreferredFoot pe = PreferredFoot.Right;
 
-                    // Adicionar o jogador ao array
-                    jogadores[contador++] = new Player(nome, data, nacionalidade, numero, 50, foto,
-                            pPos, pe, 50, 50, 50, 1.80f, 75f);
+                    jogadores[contador++] = new Player(
+                            nome,
+                            data,
+                            nacionalidade,
+                            numero,
+                            50, // passing
+                            foto,
+                            pPos,
+                            pe,
+                            50, // shooting
+                            50, // speed
+                            50, // stamina
+                            1.80f, // height
+                            75f,  // weight
+                            50,   // reflexes
+                            50,   // tackling
+                            50    // dribbling
+                    );
                 }
             }
 
@@ -72,7 +75,6 @@ public class Importer {
             e.printStackTrace();
         }
 
-        // Copiar para um array de tamanho exato
         Player[] resultado = new Player[contador];
         for (int i = 0; i < contador; i++) {
             resultado[i] = jogadores[i];
@@ -81,41 +83,34 @@ public class Importer {
         return resultado;
     }
 
-    // Método auxiliar para extrair um campo específico do JSON
     private String extrairCampo(String json, String campo) {
         String[] partes = json.split(",");
         for (String p : partes) {
             if (p.contains("\"" + campo + "\"")) {
-                String[] kv = p.split(":");
-                String valor = kv[1].replaceAll("[\"}]", "").trim();  // Limpar as aspas e chaves
-
-                // Caso o campo seja "number", limpar qualquer caractere extra como "]"
-                if (campo.equals("number")) {
-                    valor = valor.replaceAll("[^\\d]", "");  // Remove qualquer caractere não numérico
+                String[] kv = p.split(":", 2);
+                if (kv.length > 1) {
+                    String valor = kv[1].replaceAll("[\"}]", "").trim();
+                    if (campo.equals("number")) {
+                        valor = valor.replaceAll("[^\\d]", "");
+                    }
+                    return valor;
                 }
-                return valor;
             }
         }
         return "";
     }
 
-
-    // Método para importar os nomes dos clubes
     public String[] importarNomesClubes(String nomeFicheiro) {
         String[] clubes = new String[50];
         int contador = 0;
 
         try {
-            // Acessar o ficheiro diretamente sem "resources/"
             InputStream input = getClass().getClassLoader().getResourceAsStream(nomeFicheiro);
-
-            // Verificar se o ficheiro foi encontrado
             if (input == null) {
                 System.out.println("❌ Erro: ficheiro '" + nomeFicheiro + "' não encontrado.");
-                return new String[0];  // Retorna um array vazio se não encontrado
+                return new String[0];
             }
 
-            // Ler o conteúdo do ficheiro
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
             StringBuilder sb = new StringBuilder();
             String linha;
@@ -123,14 +118,11 @@ public class Importer {
             while ((linha = reader.readLine()) != null) {
                 sb.append(linha.trim());
             }
-
             reader.close();
 
-            // Processar o conteúdo JSON
             String conteudo = sb.toString();
             String[] entradas = conteudo.split("\\{");
 
-            // Extrair os nomes dos clubes
             for (int i = 0; i < entradas.length; i++) {
                 if (entradas[i].contains("name")) {
                     String bloco = "{" + entradas[i];
@@ -144,7 +136,6 @@ public class Importer {
             e.printStackTrace();
         }
 
-        // Copiar para um array de tamanho exato
         String[] resultado = new String[contador];
         for (int i = 0; i < contador; i++) {
             resultado[i] = clubes[i];

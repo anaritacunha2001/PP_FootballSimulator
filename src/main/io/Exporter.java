@@ -1,6 +1,8 @@
 package io;
 
-import model.Player;
+import main.model.Player;
+import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
+import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -22,8 +24,15 @@ public class Exporter {
                 writer.write("    \"nationality\": \"" + p.getNationality() + "\",\n");
                 writer.write("    \"number\": " + p.getNumber() + ",\n");
                 writer.write("    \"photo\": \"" + p.getPhoto() + "\",\n");
-                writer.write("    \"position\": \"" + (p.getPosition() != null ? p.getPosition().getDescription() : "") + "\",\n");
+
+                // Corrigir o acesso à posição e garantir que o método 'getPosition()' seja tratado corretamente
+                IPlayerPosition position = p.getPosition();
+                String positionDescription = (position != null) ? position.getDescription() : "Not Defined";
+                writer.write("    \"position\": \"" + positionDescription + "\",\n");
+
+                // Corrigir o acesso ao 'PreferredFoot'
                 writer.write("    \"preferredFoot\": \"" + p.getPreferredFoot() + "\"\n");
+
                 writer.write("  }" + (i < jogadores.length - 1 ? "," : "") + "\n");
             }
             writer.write("]");

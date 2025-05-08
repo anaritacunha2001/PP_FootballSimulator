@@ -1,9 +1,8 @@
-package model;
+package main.model;
 
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
-import main.model.PlayerPosition;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -23,10 +22,13 @@ public class Player implements IPlayer {
     private int stamina;
     private float height;
     private float weight;
+    private int reflexes;
+    private int tackling;
+    private int dribbling;
 
     public Player(String name, LocalDate birthDate, String nationality, int number, int passing, String photo,
                   IPlayerPosition position, PreferredFoot preferredFoot, int shooting, int speed, int stamina,
-                  float height, float weight) {
+                  float height, float weight, int reflexes, int tackling, int dribbling) {
         this.name = name;
         this.birthDate = birthDate;
         this.nationality = nationality;
@@ -40,6 +42,9 @@ public class Player implements IPlayer {
         this.stamina = stamina;
         this.height = height;
         this.weight = weight;
+        this.reflexes = reflexes;
+        this.tackling = tackling;
+        this.dribbling = dribbling;
     }
 
     @Override
@@ -136,7 +141,10 @@ public class Player implements IPlayer {
                 "\"speed\": " + speed + ", " +
                 "\"stamina\": " + stamina + ", " +
                 "\"height\": " + height + ", " +
-                "\"weight\": " + weight + " }";
+                "\"weight\": " + weight + " }" +
+                "\"reflexes\": " + reflexes + ", " +
+                "\"tackling\": " + tackling + ", " +
+                "\"dribbling\": " + dribbling + " }";
 
         System.out.println(json);
     }
@@ -149,6 +157,12 @@ public class Player implements IPlayer {
         }
 
         return name + " (" + nationality + ") #" + number + " - " + pos +
-                " | Remate: " + shooting + " | Passe: " + passing + " | Pé: " + preferredFoot;
+                " | Remate: " + shooting +
+                " | Passe: " + passing +
+                " | Pé: " + preferredFoot +
+                " | Vel: " + speed +
+                " | Ref: " + reflexes +
+                " | Tack: " + tackling +
+                " | Drib: " + dribbling;
     }
 }
