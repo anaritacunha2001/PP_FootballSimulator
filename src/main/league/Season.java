@@ -158,15 +158,15 @@ public class Season implements ISeason {
                 match.getAwayClub().getName();
     }
 
-    @Override
+    /*@Override
     public void setMatchSimulator(com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy matchSimulatorStrategy) {
 
-    }
+    }*/
 
-   /*@Override
+   @Override
     public void setMatchSimulator(MatchSimulatorStrategy simulator) {
         this.simulator = simulator;
-    }*/
+    }
 
     @Override
     public IStanding[] getLeagueStandings() {

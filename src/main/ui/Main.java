@@ -339,7 +339,7 @@ public class Main {
 
 //TESTE PARA O SIMULADOR
 
-package main.ui;
+/*package main.ui;
 
 import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
@@ -403,7 +403,7 @@ public class Main {
             System.out.println(e.getDescription());
         }
     }
-}
+}*/
 
 
 

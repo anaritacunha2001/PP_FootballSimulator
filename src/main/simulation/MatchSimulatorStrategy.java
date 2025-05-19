@@ -29,21 +29,19 @@ public class MatchSimulatorStrategy {
         PlayerSelector selector = new PlayerSelector();
 
         for (int minute = 1; minute <= 90; minute++) {
-            // 20% de probabilidade de haver um lance
+
             if (random.nextDouble() < 0.2) {
                 boolean homeAttack = random.nextBoolean();
                 ITeam attackTeam = homeAttack ? home : away;
                 ITeam defendTeam = homeAttack ? away : home;
                 IClub attackClub = attackTeam.getClub();
 
-                // Atacante aleatório da equipa atacante (STRIKER)
                 IPlayer attacker = selector.selectPlayer(attackTeam.getClub(), PlayerPosition.STRIKER);
                 if (!(attacker instanceof IExtendedPlayer)) continue;
 
                 IExtendedPlayer ext = (IExtendedPlayer) attacker;
                 int shooting = ext.getShooting();
 
-                // Guarda-redes da equipa defensora
                 IPlayer goalkeeper = selector.selectPlayer(defendTeam.getClub(), PlayerPosition.GOALKEEPER);
                 if (!(goalkeeper instanceof IExtendedPlayer)) continue;
 
@@ -52,7 +50,7 @@ public class MatchSimulatorStrategy {
 
                 int diff = shooting - reflexes + random.nextInt(20); // variação
                 if (diff > 10) {
-                    // Golo!
+
                     String desc = attacker.getName() + " marcou aos " + minute + " minutos!";
                     GameEvent goal = new GameEvent(minute, desc, "GOAL", attacker, attackTeam);
                     m.addEvent(goal);
@@ -61,6 +59,7 @@ public class MatchSimulatorStrategy {
         }
 
         m.setPlayed();
+
     }
 }
 
