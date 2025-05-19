@@ -163,10 +163,10 @@ public class Season implements ISeason {
 
     }
 
-   @Override
+   /*@Override
     public void setMatchSimulator(MatchSimulatorStrategy simulator) {
         this.simulator = simulator;
-    }
+    }*/
 
     @Override
     public IStanding[] getLeagueStandings() {
