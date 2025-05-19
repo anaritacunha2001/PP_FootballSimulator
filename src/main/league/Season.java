@@ -2,12 +2,15 @@ package main.league;
 
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
 import com.ppstudios.footballmanager.api.contracts.league.IStanding;
-import com.ppstudios.footballmanager.api.contracts.team.IClub;
-import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.league.ISchedule;
+import com.ppstudios.footballmanager.api.contracts.match.IMatch;
+import com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy;
+import com.ppstudios.footballmanager.api.contracts.team.IClub;
+
 import main.match.Match;
 import main.match.GameEvent;
-import main.simulation.MatchSimulatorStrategy;
+import main.manager.Formation;
+import main.manager.Team;
 
 public class Season implements ISeason {
 
@@ -42,8 +45,38 @@ public class Season implements ISeason {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public int getYear() {
         return year;
+    }
+
+    @Override
+    public int getMaxTeams() {
+        return maxTeams;
+    }
+
+    @Override
+    public int getMaxRounds() {
+        return maxRounds;
+    }
+
+    @Override
+    public int getPointsPerWin() {
+        return pointsPerWin;
+    }
+
+    @Override
+    public int getPointsPerDraw() {
+        return pointsPerDraw;
+    }
+
+    @Override
+    public int getPointsPerLoss() {
+        return pointsPerLoss;
     }
 
     @Override
@@ -51,7 +84,9 @@ public class Season implements ISeason {
         if (club == null || clubCount >= maxTeams) return false;
 
         clubs[clubCount] = club;
-        standings[clubCount] = new Standing(null); // ITeam será atribuído mais tarde
+
+        // Cria uma equipa com formação 4-4-2 associada ao standing
+        standings[clubCount] = new Standing(new Team(club, new Formation("4-4-2")));
         clubCount++;
         return true;
     }
@@ -75,9 +110,30 @@ public class Season implements ISeason {
     }
 
     @Override
+    public int getNumberOfCurrentTeams() {
+        return clubCount;
+    }
+
+    @Override
+    public IClub[] getCurrentClubs() {
+        IClub[] result = new IClub[clubCount];
+        System.arraycopy(clubs, 0, result, 0, clubCount);
+        return result;
+    }
+
+    @Override
+    public IStanding[] getLeagueStandings() {
+        return standings;
+    }
+
+    @Override
+    public ISchedule getSchedule() {
+        return null; // não implementado
+    }
+
+    @Override
     public void generateSchedule() {
-        // Geração simplificada
-        // Podes implementar round-robin depois
+        // Deixa vazio por agora, podes implementar round-robin depois
     }
 
     @Override
@@ -108,24 +164,14 @@ public class Season implements ISeason {
     }
 
     @Override
-    public void simulateRound() {
-        if (simulator == null || currentRound >= maxRounds) return;
-
-        Match[] roundMatches = matches[currentRound];
-        for (Match match : roundMatches) {
-            if (match != null && !match.isPlayed()) {
-                simulator.simulate(match);
+    public int getCurrentMatches() {
+        int count = 0;
+        for (int r = 0; r < currentRound; r++) {
+            for (int m = 0; m < maxTeams; m++) {
+                if (matches[r][m] != null) count++;
             }
         }
-
-        currentRound++;
-    }
-
-    @Override
-    public void simulateSeason() {
-        while (!isSeasonComplete()) {
-            simulateRound();
-        }
+        return count;
     }
 
     @Override
@@ -149,6 +195,35 @@ public class Season implements ISeason {
     }
 
     @Override
+    public void simulateRound() {
+        if (simulator == null || currentRound >= maxRounds) return;
+
+        Match[] roundMatches = matches[currentRound];
+        for (Match match : roundMatches) {
+            if (match != null && !match.isPlayed()) {
+                simulator.simulate(match);
+            }
+        }
+
+        currentRound++;
+    }
+
+    @Override
+    public void simulateSeason() {
+        while (!isSeasonComplete()) {
+            simulateRound();
+        }
+    }
+
+    @Override
+    public void setMatchSimulator(MatchSimulatorStrategy simulator) {
+        if (simulator == null) {
+            throw new IllegalArgumentException("Simulador não pode ser nulo.");
+        }
+        this.simulator = simulator;
+    }
+
+    @Override
     public String displayMatchResult(IMatch match) {
         if (match == null) return "Jogo inválido.";
         return match.getHomeClub().getName() + " " +
@@ -159,82 +234,7 @@ public class Season implements ISeason {
     }
 
     @Override
-    public void setMatchSimulator(com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy matchSimulatorStrategy) {
-
-    }
-
-   /*@Override
-    public void setMatchSimulator(MatchSimulatorStrategy simulator) {
-        this.simulator = simulator;
-    }*/
-
-    @Override
-    public IStanding[] getLeagueStandings() {
-        return standings;
-    }
-
-    @Override
-    public ISchedule getSchedule() {
-        // A criar depois
-        return null;
-    }
-
-    @Override
-    public int getPointsPerWin() {
-        return pointsPerWin;
-    }
-
-    @Override
-    public int getPointsPerDraw() {
-        return pointsPerDraw;
-    }
-
-    @Override
-    public int getPointsPerLoss() {
-        return pointsPerLoss;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public int getMaxTeams() {
-        return maxTeams;
-    }
-
-    @Override
-    public int getMaxRounds() {
-        return maxRounds;
-    }
-
-    @Override
-    public int getCurrentMatches() {
-        int count = 0;
-        for (int r = 0; r < currentRound; r++) {
-            for (int m = 0; m < maxTeams; m++) {
-                if (matches[r][m] != null) count++;
-            }
-        }
-        return count;
-    }
-
-    @Override
-    public int getNumberOfCurrentTeams() {
-        return clubCount;
-    }
-
-    @Override
-    public IClub[] getCurrentClubs() {
-        IClub[] result = new IClub[clubCount];
-        System.arraycopy(clubs, 0, result, 0, clubCount);
-        return result;
-    }
-
-    @Override
     public void exportToJson() {
         System.out.println("{ \"season\": \"" + name + "\", \"year\": " + year + " }");
     }
 }
-

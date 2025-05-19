@@ -1,8 +1,10 @@
-/*package io;
+package io;
 
+import main.model.Club;
 import main.model.Player;
 import main.model.PlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
+import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -18,7 +20,7 @@ public class Importer {
         try {
             InputStream input = getClass().getClassLoader().getResourceAsStream(nomeFicheiro);
             if (input == null) {
-                System.out.println("❌ Erro: ficheiro '" + nomeFicheiro + "' não encontrado.");
+                System.out.println("Erro: ficheiro '" + nomeFicheiro + "' não encontrado.");
                 return new Player[0];
             }
 
@@ -32,16 +34,25 @@ public class Importer {
             reader.close();
 
             String conteudo = sb.toString();
-            String[] entradas = conteudo.split("\\{");
 
-            for (int i = 0; i < entradas.length; i++) {
-                if (entradas[i].contains("name")) {
-                    String json = "{" + entradas[i];
+            if (conteudo.contains("\"squad\"")) {
+                int start = conteudo.indexOf("[");
+                int end = conteudo.lastIndexOf("]");
+                conteudo = conteudo.substring(start + 1, end);
+            } else {
+                conteudo = conteudo.replace("[", "").replace("]", "");
+            }
+
+            String[] entradas = conteudo.split("(?<=\\}),(?=\\{)");
+
+            for (String entrada : entradas) {
+                if (entrada.contains("name")) {
+                    String json = "{" + entrada;
 
                     String nome = extrairCampo(json, "name");
                     String nascimento = extrairCampo(json, "birthDate");
                     String nacionalidade = extrairCampo(json, "nationality");
-                    String posicao = extrairCampo(json, "position");
+                    String posicao = extrairCampo(json, "basePosition");
                     String foto = extrairCampo(json, "photo");
                     int numero = Integer.parseInt(extrairCampo(json, "number"));
 
@@ -54,24 +65,24 @@ public class Importer {
                             data,
                             nacionalidade,
                             numero,
-                            50, // passing
+                            50,
                             foto,
                             pPos,
                             pe,
-                            50, // shooting
-                            50, // speed
-                            50, // stamina
-                            1.80f, // height
-                            75f,  // weight
-                            50,   // reflexes
-                            50,   // tackling
-                            50    // dribbling
+                            50,
+                            50,
+                            50,
+                            1.80f,
+                            75f,
+                            50,
+                            50,
+                            50
                     );
                 }
             }
 
         } catch (Exception e) {
-            System.out.println("❌ Erro ao importar jogadores.");
+            System.out.println("Erro ao importar jogadores.");
             e.printStackTrace();
         }
 
@@ -107,7 +118,7 @@ public class Importer {
         try {
             InputStream input = getClass().getClassLoader().getResourceAsStream(nomeFicheiro);
             if (input == null) {
-                System.out.println("❌ Erro: ficheiro '" + nomeFicheiro + "' não encontrado.");
+                System.out.println("Erro: ficheiro '" + nomeFicheiro + "' não encontrado.");
                 return new String[0];
             }
 
@@ -132,7 +143,7 @@ public class Importer {
             }
 
         } catch (Exception e) {
-            System.out.println("❌ Erro ao importar clubes.");
+            System.out.println("Erro ao importar clubes.");
             e.printStackTrace();
         }
 
@@ -143,4 +154,51 @@ public class Importer {
 
         return resultado;
     }
-}*/
+
+    public Club[] importarClubes(String nomeFicheiro) {
+        Club[] clubes = new Club[20];
+        int contador = 0;
+
+        try {
+            InputStream input = getClass().getClassLoader().getResourceAsStream(nomeFicheiro);
+            if (input == null) {
+                System.out.println("Erro: ficheiro '" + nomeFicheiro + "' não encontrado.");
+                return new Club[0];
+            }
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+            StringBuilder sb = new StringBuilder();
+            String linha;
+
+            while ((linha = reader.readLine()) != null) {
+                sb.append(linha.trim());
+            }
+            reader.close();
+
+            String conteudo = sb.toString();
+            String[] entradas = conteudo.split("\\{");
+
+            for (String entrada : entradas) {
+                if (entrada.contains("name")) {
+                    String bloco = "{" + entrada;
+                    String nome = extrairCampo(bloco, "name");
+                    String code = extrairCampo(bloco, "code");
+                    String country = extrairCampo(bloco, "country");
+                    int founded = Integer.parseInt(extrairCampo(bloco, "founded"));
+                    String stadium = extrairCampo(bloco, "stadium");
+                    String logo = extrairCampo(bloco, "logo");
+
+                    clubes[contador++] = new Club(nome, code, country, founded, stadium, logo, new IPlayer[0]);
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao importar clubes detalhados.");
+            e.printStackTrace();
+        }
+
+        Club[] resultado = new Club[contador];
+        System.arraycopy(clubes, 0, resultado, 0, contador);
+        return resultado;
+    }
+}

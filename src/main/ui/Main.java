@@ -340,24 +340,24 @@ public class Main {
 //TESTE PARA O SIMULADOR
 
 package main.ui;
-
-import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
-import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
-import main.manager.Team;
-import main.manager.Formation;
-import main.model.Club;
-import main.model.Player;
-import main.model.PlayerPosition;
-import main.simulation.MatchSimulatorStrategy;
+import com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy;
+import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
+import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
+
+import main.league.Season;
 import main.match.Match;
 import main.match.GameEvent;
-import main.strategy.PlayerSelector;
+import main.model.Player;
+import main.model.PlayerPosition;
+import main.model.Club;
+import main.simulation.MatchSimulatorStrategyImpl;
 
 import java.time.LocalDate;
 
-public class Main {
+
+/*public class Main {
     public static void main(String[] args) {
         // Criar jogadores (mínimo para jogar)
         Player gk1 = new Player("GR A", LocalDate.of(1990, 1, 1), "Portugal", 1, 50, "foto.png", PlayerPosition.GOALKEEPER, PreferredFoot.Right, 30, 40, 70, 1.90f, 80f, 95, 20, 10);
@@ -403,11 +403,87 @@ public class Main {
             System.out.println(e.getDescription());
         }
     }
+}*/
+// No Main.java
+/*public class Main {
+    public static void main(String[] args) {
+        // Criar jogadores e clubes
+        Player gk = new Player("José Guarda", LocalDate.of(1990, 1, 1), "Portugal", 1, 50, "gk.png", PlayerPosition.GOALKEEPER, PreferredFoot.Right, 30, 40, 70, 1.90f, 82f, 95, 40, 20);
+        Player st = new Player("Miguel Avançado", LocalDate.of(1998, 12, 25), "Espanha", 9, 60, "st.png", PlayerPosition.STRIKER, PreferredFoot.Right, 85, 85, 77, 1.80f, 75f, 30, 45, 90);
+        IPlayer[] squad = new IPlayer[]{gk, st};
+
+        IClub clubA = new Club("Clube A", "CLA", "Portugal", 1900, "Estádio A", "logoA.png", squad);
+        IClub clubB = new Club("Clube B", "CLB", "Espanha", 1905, "Estádio B", "logoB.png", squad);
+
+        // Criar Season
+        Season season = new Season("LigaTeste", 2025, 2, 1);
+        season.addClub(clubA);
+        season.addClub(clubB);
+
+        // Passar a instância correta do simulador
+        MatchSimulatorStrategy simulator = new main.simulation.MatchSimulatorStrategyImpl();
+        season.setMatchSimulator(simulator);
+
+        // Gerar o calendário e simular
+        season.generateSchedule();
+        season.simulateRound();
+
+        // Exibir o resultado do primeiro jogo
+        IMatch[] jogos = season.getMatches();
+        if (jogos.length > 0) {
+            System.out.println(season.displayMatchResult(jogos[0]));
+        }
+    }
+}*/
+
+/*public class Main {
+    public static void main(String[] args) {
+        // Criar jogadores
+        IPlayer gk = new Player("José Guarda", LocalDate.of(1990, 1, 1), "Portugal", 1, 50, "gk.png",
+                PlayerPosition.GOALKEEPER, PreferredFoot.Right, 30, 40, 70, 1.90f, 82f, 95, 40, 20);
+
+        IPlayer st = new Player("Miguel Avançado", LocalDate.of(1998, 12, 25), "Espanha", 9, 60, "st.png",
+                PlayerPosition.STRIKER, PreferredFoot.Right, 85, 85, 77, 1.80f, 75f, 30, 45, 90);
+
+        IPlayer[] jogadoresA = { gk, st };
+        IPlayer[] jogadoresB = { gk, st }; // Mesmo plantel por simplicidade
+
+        // Criar clubes
+        IClub clubeA = new Club("Clube A", "CLA", "Portugal", 1900, "Estádio A", "logoA.png", jogadoresA);
+        IClub clubeB = new Club("Clube B", "CLB", "Espanha", 1905, "Estádio B", "logoB.png", jogadoresB);
+
+        // Criar temporada
+        Season season = new Season("Liga Teste", 2025, 2, 1);
+
+        // Adicionar clubes
+        season.addClub(clubeA);
+        season.addClub(clubeB);
+
+        // Atribuir simulador
+        season.setMatchSimulator(new MatchSimulatorStrategyImpl());
+
+        // Gerar calendário e simular ronda
+        season.generateSchedule();
+        season.simulateRound();
+
+        // Mostrar resultados
+        System.out.println("📅 Resultados da ronda 1:");
+        for (IMatch match : season.getMatches(0)) {
+            if (match != null) {
+                System.out.println(season.displayMatchResult(match));
+                for (var e : match.getEvents()) {
+                    System.out.println("   ➤ " + e.getDescription());
+                }
+            }
+        }
+    }
+}*/
+
+
+public class Main {
+    public static void main(String[] args) {
+        Menu menu = new Menu();
+        menu.mostrarMenuPrincipal();
+    }
 }
-
-
-
-
-
-
 

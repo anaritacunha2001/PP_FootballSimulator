@@ -1,4 +1,4 @@
-/*package io;
+package io;
 
 import main.model.Player;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
@@ -41,8 +41,8 @@ public class Exporter {
             System.out.println("✔ Plantel exportado para: " + caminho);
 
         } catch (IOException e) {
-            System.out.println("❌ Erro ao exportar o plantel.");
+            System.out.println(" Erro ao exportar o plantel.");
             e.printStackTrace();
         }
     }
-}*/
+}
