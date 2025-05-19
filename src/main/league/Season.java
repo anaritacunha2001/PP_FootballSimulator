@@ -7,7 +7,7 @@ import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.league.ISchedule;
 import main.match.Match;
 import main.match.GameEvent;
-import main.simulation.MatchSimulatorStrategy;
+import main.simulation.MatchSimulatorStrategyImpl;
 
 public class Season implements ISeason {
 
@@ -23,7 +23,7 @@ public class Season implements ISeason {
     private final int maxRounds;
     private final int maxTeams;
 
-    private MatchSimulatorStrategy simulator;
+    private MatchSimulatorStrategyImpl simulator;
 
     private final int pointsPerWin = 3;
     private final int pointsPerDraw = 1;

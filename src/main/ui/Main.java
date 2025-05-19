@@ -350,14 +350,14 @@ import main.manager.Formation;
 import main.model.Club;
 import main.model.Player;
 import main.model.PlayerPosition;
-import main.simulation.MatchSimulatorStrategy;
+import main.simulation.MatchSimulatorStrategyImpl;
 import main.match.Match;
 import main.match.GameEvent;
 import main.strategy.PlayerSelector;
 
 import java.time.LocalDate;
 
-public class Main {
+/*public class Main {
     public static void main(String[] args) {
         // Criar jogadores (mínimo para jogar)
         Player gk1 = new Player("GR A", LocalDate.of(1990, 1, 1), "Portugal", 1, 50, "foto.png", PlayerPosition.GOALKEEPER, PreferredFoot.Right, 30, 40, 70, 1.90f, 80f, 95, 20, 10);
@@ -403,10 +403,15 @@ public class Main {
             System.out.println(e.getDescription());
         }
     }
+}*/
+
+
+public class Main {
+    public static void main(String[] args) {
+        Menu menu = new Menu();
+        menu.mostrarMenuPrincipal();
+    }
 }
-
-
-
 
 
 
