@@ -21,7 +21,7 @@ public class Menu {
             System.out.println("4. Ver calendário de jogos");
             System.out.println("5. Ver estatísticas");
             System.out.println("6. Avançar para o próximo jogo");
-            System.out.println("0. Sair");
+            System.out.println("0. Fechar");
             System.out.print("Escolha uma opção: ");
 
             opcao = lerOpcao();
