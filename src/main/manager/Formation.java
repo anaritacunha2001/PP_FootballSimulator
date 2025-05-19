@@ -17,6 +17,10 @@ public class Formation implements IFormation {
 
     @Override
     public int getTacticalAdvantage(IFormation opponent) {
+        if (opponent == null) {
+            throw new IllegalArgumentException("Formação adversária não pode ser null.");
+        }
+
         String other = opponent.getDisplayName();
 
         if (this.displayName.equals("4-3-3") && other.equals("4-4-2")) {

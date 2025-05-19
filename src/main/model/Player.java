@@ -3,20 +3,21 @@ package main.model;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
+import main.model.PlayerPosition;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class Player implements IPlayer {
+public class Player implements IExtendedPlayer {
 
     private String name;
     private LocalDate birthDate;
     private String nationality;
     private int number;
-    private int passing;
     private String photo;
     private IPlayerPosition position;
     private PreferredFoot preferredFoot;
+    private int passing;
     private int shooting;
     private int speed;
     private int stamina;
@@ -118,6 +119,21 @@ public class Player implements IPlayer {
     }
 
     @Override
+    public int getReflexes() {
+        return reflexes;
+    }
+
+    @Override
+    public int getTackling() {
+        return tackling;
+    }
+
+    @Override
+    public int getDribbling() {
+        return dribbling;
+    }
+
+    @Override
     public void setPosition(IPlayerPosition position) {
         this.position = position;
     }
@@ -141,7 +157,7 @@ public class Player implements IPlayer {
                 "\"speed\": " + speed + ", " +
                 "\"stamina\": " + stamina + ", " +
                 "\"height\": " + height + ", " +
-                "\"weight\": " + weight + " }" +
+                "\"weight\": " + weight + ", " +
                 "\"reflexes\": " + reflexes + ", " +
                 "\"tackling\": " + tackling + ", " +
                 "\"dribbling\": " + dribbling + " }";
@@ -159,10 +175,10 @@ public class Player implements IPlayer {
         return name + " (" + nationality + ") #" + number + " - " + pos +
                 " | Remate: " + shooting +
                 " | Passe: " + passing +
-                " | Pé: " + preferredFoot +
                 " | Vel: " + speed +
                 " | Ref: " + reflexes +
                 " | Tack: " + tackling +
-                " | Drib: " + dribbling;
+                " | Drib: " + dribbling +
+                " | Pé: " + preferredFoot;
     }
 }

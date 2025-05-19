@@ -1,4 +1,4 @@
-package io;
+/*package io;
 
 import main.model.Player;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
@@ -45,4 +45,4 @@ public class Exporter {
             e.printStackTrace();
         }
     }
-}
+}*/

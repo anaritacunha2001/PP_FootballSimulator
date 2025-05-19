@@ -7,39 +7,24 @@ import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
 
 public class Club implements IClub {
 
-    private final int CLUB_DEFAULT_SIZE = 30;
+    private String name;
+    private String code;
+    private String country;
+    private int foundedYear;
+    private String stadiumName;
+    private String logo;
+    private IPlayer[] players;
+    private int playerCount;
 
-    protected String name;
-    protected String country;
-    protected String code;
-    protected int foundedYear;
-    protected String stadiumName;
-    protected String logo;
-    protected IPlayer[] iPlayers;
-    protected int numberOfPlayers;
-
-    // NESTE ASSUMIMOS QUE O CLUBE É CRIADO ANTES DA IMPORTAÇÃO DOS JOGADORES
-    public Club(String name, String country, String code, int foundedYear, String stadiumName, String logo) {
+    public Club(String name, String code, String country, int foundedYear, String stadiumName, String logo, IPlayer[] players) {
         this.name = name;
-        this.country = country;
         this.code = code;
+        this.country = country;
         this.foundedYear = foundedYear;
         this.stadiumName = stadiumName;
         this.logo = logo;
-        this.iPlayers = new IPlayer[CLUB_DEFAULT_SIZE];
-        this.numberOfPlayers = 0;
-    }
-
-    // NESTE JÁ RECEBEMOS OS JOGADORES IMPORTADOS E SÓ CRIAMOS O CLUBE DEPOIS
-    public Club(String name, String country, String code, int foundedYear, String stadiumName, String logo, IPlayer[] iPlayers, int numberOfPlayers) {
-        this.name = name;
-        this.country = country;
-        this.code = code;
-        this.foundedYear = foundedYear;
-        this.stadiumName = stadiumName;
-        this.logo = logo;
-        this.iPlayers = iPlayers;
-        this.numberOfPlayers = numberOfPlayers;
+        this.players = players;
+        this.playerCount = players != null ? players.length : 0;
     }
 
     @Override
@@ -49,7 +34,7 @@ public class Club implements IClub {
 
     @Override
     public IPlayer[] getPlayers() {
-        return this.iPlayers;
+        return this.players;
     }
 
     @Override
@@ -78,18 +63,28 @@ public class Club implements IClub {
     }
 
     @Override
-    public void addPlayer(IPlayer iPlayer) {
-        if (iPlayers.length == this.numberOfPlayers) {
-            expandCapacity();
+    public void addPlayer(IPlayer player) {
+        if (player == null) {
+            throw new IllegalArgumentException("Jogador não pode ser null.");
         }
-        this.iPlayers[this.numberOfPlayers] = iPlayer;
-        this.numberOfPlayers++;
+        if (playerCount >= players.length) {
+            throw new IllegalStateException("O clube está cheio.");
+        }
+        if (isPlayer(player)) {
+            throw new IllegalArgumentException("Jogador já existe no clube.");
+        }
+        players[playerCount++] = player;
     }
 
+
     @Override
-    public boolean isPlayer(IPlayer iPlayer) {
-        for (int i = 0; i < iPlayers.length; i++) {
-            if (iPlayers[i] == iPlayer) {
+    public boolean isPlayer(IPlayer player) {
+        if (player == null) {
+            throw new IllegalArgumentException("Jogador não pode ser null.");
+        }
+
+        for (int i = 0; i < playerCount; i++) {
+            if (players[i] != null && players[i].equals(player)) {
                 return true;
             }
         }
@@ -97,47 +92,74 @@ public class Club implements IClub {
     }
 
     @Override
-    public void removePlayer(IPlayer iPlayer) {
-        for (int i = 0; i < iPlayers.length; i++) {
-            if (iPlayers[i] == iPlayer) {
-                for (int j = i; j < iPlayers.length - 1; j++) {
-                    iPlayers[j] = iPlayers[j + 1];
+    public void removePlayer(IPlayer player) {
+        if (player == null) {
+            throw new IllegalArgumentException("Jogador não pode ser null.");
+        }
+
+        if (!isPlayer(player)) {
+            throw new IllegalArgumentException("Jogador não pertence ao clube.");
+        }
+
+        for (int i = 0; i < playerCount; i++) {
+            if (players[i] != null && players[i].equals(player)) {
+                for (int j = i; j < playerCount - 1; j++) {
+                    players[j] = players[j + 1];
                 }
-                iPlayers[iPlayers.length - 1] = null;
-                this.numberOfPlayers--;
+                players[playerCount - 1] = null;
+                playerCount--;
+                return;
             }
         }
     }
 
+
     @Override
     public int getPlayerCount() {
-        return this.numberOfPlayers;
+        return this.playerCount;
     }
 
     @Override
     public IPlayer selectPlayer(IPlayerSelector selector, IPlayerPosition position) {
+        if (selector == null || position == null) {
+            throw new IllegalArgumentException("Selector e posição não podem ser null.");
+        }
+
         return selector.selectPlayer(this, position);
     }
 
     @Override
     public boolean isValid() {
-        return name != null && !name.isEmpty() &&
-                code != null && !code.isEmpty() &&
-                country != null && !country.isEmpty() &&
-                foundedYear > 1800 &&
-                stadiumName != null && !stadiumName.isEmpty() &&
-                logo != null && !logo.isEmpty() &&
-                numberOfPlayers > 0;
+        if (players == null || players.length == 0) {
+            throw new IllegalStateException("O clube está vazio.");
+        }
+
+        if (playerCount == 0) {
+            throw new IllegalStateException("O clube não tem jogadores.");
+        }
+
+        if (playerCount < 16) {
+            throw new IllegalStateException("O clube deve ter pelo menos 16 jogadores.");
+        }
+
+        int gkCount = 0;
+        for (int i = 0; i < playerCount; i++) {
+            if (players[i] != null && players[i].getPosition().getDescription().equalsIgnoreCase("GOALKEEPER")) {
+                gkCount++;
+            }
+        }
+
+        if (gkCount == 0) {
+            throw new IllegalStateException("O clube não tem guarda-redes.");
+        }
+
+        return true;
     }
+
+
 
     @Override
     public void exportToJson() {
-        System.out.println("{\"name\":\"" + name + "\",\"code\":\"" + code + "\"}");
-    }
-
-    private void expandCapacity() {
-        IPlayer[] newArray = new IPlayer[iPlayers.length * 2];
-        System.arraycopy(iPlayers, 0, newArray, 0, iPlayers.length);
-        iPlayers = newArray;
+        System.out.println("{\\\"name\\\":\\\"" + name + "\\\",\\\"code\\\":\\\"" + code + "\\\"}");
     }
 }

@@ -1,4 +1,4 @@
-package io;
+/*package io;
 
 import main.model.Player;
 import main.model.PlayerPosition;
@@ -143,4 +143,4 @@ public class Importer {
 
         return resultado;
     }
-}
+}*/
