@@ -33,14 +33,16 @@ public class MatchSimulatorStrategy implements com.ppstudios.footballmanager.api
                 IPlayer attacker = selector.selectPlayer(attackTeam.getClub(), PlayerPosition.STRIKER);
                 IPlayer goalkeeper = selector.selectPlayer(defendTeam.getClub(), PlayerPosition.GOALKEEPER);
 
+                if (attacker == null || goalkeeper == null) continue;
+
                 if (!(attacker instanceof IExtendedPlayer) || !(goalkeeper instanceof IExtendedPlayer)) continue;
 
                 int shooting = ((IExtendedPlayer) attacker).getShooting();
                 int reflexes = ((IExtendedPlayer) goalkeeper).getReflexes();
 
-                int diff = shooting - reflexes + random.nextInt(20); // variação
+                int diff = shooting - reflexes + random.nextInt(20);
 
-                if (diff > 10) {
+                if (diff > 0) {
                     String desc = attacker.getName() + " marcou aos " + minute + " minutos!";
                     GameEvent goal = new GameEvent(minute, desc, "GOAL", attacker, attackTeam);
                     m.addEvent(goal);
@@ -49,5 +51,9 @@ public class MatchSimulatorStrategy implements com.ppstudios.footballmanager.api
         }
 
         m.setPlayed();
+
+        System.out.println("Gols Casa: " + m.getTotalByEvent(GameEvent.class, m.getHomeClub()));
+        System.out.println("Gols Fora: " + m.getTotalByEvent(GameEvent.class, m.getAwayClub()));
     }
+
 }

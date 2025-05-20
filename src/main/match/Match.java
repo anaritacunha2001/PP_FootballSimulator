@@ -95,17 +95,17 @@ public class Match implements IMatch {
         int total = 0;
         for (int i = 0; i < eventCount; i++) {
             IEvent e = events[i];
-            if (e != null && e.getClass().equals(eventClass)) {
-                if (e instanceof GameEvent) {
-                    GameEvent ge = (GameEvent) e;
-                    if (ge.getTeam().getClub().equals(club)) {
-                        total++;
-                    }
+            if (e instanceof GameEvent ge) {
+                if (ge.getTeam().getClub().equals(club) && "GOAL".equalsIgnoreCase(ge.getType())) {
+                    total++;
                 }
             }
         }
         return total;
     }
+
+
+
 
     @Override
     public boolean isValid() {
@@ -129,8 +129,9 @@ public class Match implements IMatch {
 
     @Override
     public int getEventCount() {
-        return 0;
+        return eventCount;
     }
+
 
     @Override
     public void exportToJson() {
