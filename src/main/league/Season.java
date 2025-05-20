@@ -8,7 +8,6 @@ import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy;
 import main.match.GameEvent;
 import main.match.Match;
-import main.simulation.MatchSimulatorStrategy;
 
 public class Season implements ISeason {
 
