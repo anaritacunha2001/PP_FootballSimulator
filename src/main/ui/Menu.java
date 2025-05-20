@@ -129,13 +129,12 @@ package main.ui;
 
 import com.ppstudios.footballmanager.api.contracts.league.IStanding;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
-import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import io.Importer;
 import main.league.Season;
 import main.model.Club;
 import main.model.Player;
-import main.simulation.MatchSimulatorStrategyImpl;
+import main.simulation.MatchSimulatorStrategy;
 
 import java.util.Scanner;
 
@@ -198,7 +197,7 @@ public class Menu {
         int ano = Integer.parseInt(scanner.nextLine());
 
         season = new Season(nome, ano, maxClubes, maxRondas);
-        season.setMatchSimulator(new MatchSimulatorStrategyImpl());
+        season.setMatchSimulator(new MatchSimulatorStrategy());
         System.out.println("✅ Época criada com sucesso.");
     }
 

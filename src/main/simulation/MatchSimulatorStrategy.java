@@ -1,7 +1,6 @@
 package main.simulation;
 
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
-import com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import main.match.Match;
@@ -12,7 +11,7 @@ import main.strategy.PlayerSelector;
 
 import java.util.Random;
 
-public class MatchSimulatorStrategyImpl implements MatchSimulatorStrategy {
+public class MatchSimulatorStrategy implements com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy {
 
     private final Random random = new Random();
 

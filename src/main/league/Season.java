@@ -2,12 +2,13 @@ package main.league;
 
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
 import com.ppstudios.footballmanager.api.contracts.league.IStanding;
+import com.ppstudios.footballmanager.api.contracts.league.ISchedule;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
-import com.ppstudios.footballmanager.api.contracts.league.ISchedule;
-import main.match.Match;
+import com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy;
 import main.match.GameEvent;
-import main.simulation.MatchSimulatorStrategyImpl;
+import main.match.Match;
+import main.simulation.MatchSimulatorStrategy;
 
 public class Season implements ISeason {
 
@@ -17,17 +18,17 @@ public class Season implements ISeason {
     private final Standing[] standings;
     private int clubCount;
 
-    private final Match[][] matches;
-    private int currentRound;
-
     private final int maxRounds;
     private final int maxTeams;
 
-    private MatchSimulatorStrategyImpl simulator;
+    private int currentRound;
+    private MatchSimulatorStrategy simulator;
 
     private final int pointsPerWin = 3;
     private final int pointsPerDraw = 1;
     private final int pointsPerLoss = 0;
+
+    private Schedule schedule;
 
     public Season(String name, int year, int maxTeams, int maxRounds) {
         this.name = name;
@@ -36,7 +37,6 @@ public class Season implements ISeason {
         this.maxRounds = maxRounds;
         this.clubs = new IClub[maxTeams];
         this.standings = new Standing[maxTeams];
-        this.matches = new Match[maxRounds][maxTeams]; // simplificado
         this.clubCount = 0;
         this.currentRound = 0;
     }
@@ -51,7 +51,7 @@ public class Season implements ISeason {
         if (club == null || clubCount >= maxTeams) return false;
 
         clubs[clubCount] = club;
-        standings[clubCount] = new Standing(null); // ITeam será atribuído mais tarde
+        standings[clubCount] = new Standing(null);
         clubCount++;
         return true;
     }
@@ -76,43 +76,50 @@ public class Season implements ISeason {
 
     @Override
     public void generateSchedule() {
-        // Geração simplificada
-        // Podes implementar round-robin depois
+        if (clubCount < 2) {
+            throw new IllegalStateException("É necessário pelo menos 2 clubes.");
+        }
+
+        if (schedule != null && schedule.getAllMatches().length > 0) {
+            throw new IllegalStateException("Já existe um calendário.");
+        }
+
+        int totalRounds = clubCount - 1;
+        int matchesPerRound = clubCount / 2;
+        schedule = new Schedule(totalRounds, matchesPerRound);
+
+        IMatch[][] rounds = new IMatch[totalRounds][matchesPerRound];
+
+        for (int round = 0; round < totalRounds; round++) {
+            int matchIndex = 0;
+            for (int i = 0; i < clubCount / 2; i++) {
+                int home = (round + i) % clubCount;
+                int away = (clubCount - 1 - i + round) % clubCount;
+                if (home == away) continue;
+
+                rounds[round][matchIndex++] = new Match(clubs[home], clubs[away], round + 1);
+            }
+        }
+
+        schedule.setInternalRounds(rounds); // já adicionaste este método em Schedule
     }
 
     @Override
     public IMatch[] getMatches() {
-        int total = 0;
-        for (int r = 0; r < maxRounds; r++) {
-            for (int m = 0; m < maxTeams; m++) {
-                if (matches[r][m] != null) total++;
-            }
-        }
-
-        IMatch[] all = new IMatch[total];
-        int idx = 0;
-        for (int r = 0; r < maxRounds; r++) {
-            for (int m = 0; m < maxTeams; m++) {
-                if (matches[r][m] != null) {
-                    all[idx++] = matches[r][m];
-                }
-            }
-        }
-        return all;
+        return schedule != null ? schedule.getAllMatches() : new IMatch[0];
     }
 
     @Override
     public IMatch[] getMatches(int round) {
-        if (round < 0 || round >= maxRounds) return new IMatch[0];
-        return matches[round];
+        return schedule != null ? schedule.getMatchesForRound(round) : new IMatch[0];
     }
 
     @Override
     public void simulateRound() {
-        if (simulator == null || currentRound >= maxRounds) return;
+        if (simulator == null || schedule == null || isSeasonComplete()) return;
 
-        Match[] roundMatches = matches[currentRound];
-        for (Match match : roundMatches) {
+        IMatch[] matches = schedule.getMatchesForRound(currentRound);
+        for (IMatch match : matches) {
             if (match != null && !match.isPlayed()) {
                 simulator.simulate(match);
             }
@@ -135,17 +142,13 @@ public class Season implements ISeason {
 
     @Override
     public boolean isSeasonComplete() {
-        return currentRound >= maxRounds;
+        return schedule != null && currentRound >= schedule.getNumberOfRounds();
     }
 
     @Override
     public void resetSeason() {
-        for (int r = 0; r < maxRounds; r++) {
-            for (int m = 0; m < maxTeams; m++) {
-                matches[r][m] = null;
-            }
-        }
         currentRound = 0;
+        schedule = null;
     }
 
     @Override
@@ -159,14 +162,11 @@ public class Season implements ISeason {
     }
 
     @Override
-    public void setMatchSimulator(com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy matchSimulatorStrategy) {
-
+    public void setMatchSimulator(MatchSimulatorStrategy matchSimulatorStrategy) {
+        if (matchSimulatorStrategy != null) {
+            this.simulator = (MatchSimulatorStrategy) matchSimulatorStrategy;
+        }
     }
-
-   /*@Override
-    public void setMatchSimulator(MatchSimulatorStrategy simulator) {
-        this.simulator = simulator;
-    }*/
 
     @Override
     public IStanding[] getLeagueStandings() {
@@ -175,8 +175,7 @@ public class Season implements ISeason {
 
     @Override
     public ISchedule getSchedule() {
-        // A criar depois
-        return null;
+        return schedule;
     }
 
     @Override
@@ -212,10 +211,8 @@ public class Season implements ISeason {
     @Override
     public int getCurrentMatches() {
         int count = 0;
-        for (int r = 0; r < currentRound; r++) {
-            for (int m = 0; m < maxTeams; m++) {
-                if (matches[r][m] != null) count++;
-            }
+        for (int i = 0; i < currentRound; i++) {
+            count += schedule.getMatchesForRound(i).length;
         }
         return count;
     }
@@ -237,4 +234,3 @@ public class Season implements ISeason {
         System.out.println("{ \"season\": \"" + name + "\", \"year\": " + year + " }");
     }
 }
-

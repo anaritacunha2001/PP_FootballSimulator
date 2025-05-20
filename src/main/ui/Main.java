@@ -341,22 +341,6 @@ public class Main {
 
 package main.ui;
 
-import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
-import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
-import com.ppstudios.footballmanager.api.contracts.team.IClub;
-import com.ppstudios.footballmanager.api.contracts.match.IMatch;
-import main.manager.Team;
-import main.manager.Formation;
-import main.model.Club;
-import main.model.Player;
-import main.model.PlayerPosition;
-import main.simulation.MatchSimulatorStrategyImpl;
-import main.match.Match;
-import main.match.GameEvent;
-import main.strategy.PlayerSelector;
-
-import java.time.LocalDate;
-
 /*public class Main {
     public static void main(String[] args) {
         // Criar jogadores (mínimo para jogar)
