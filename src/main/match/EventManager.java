@@ -9,7 +9,7 @@ public class EventManager implements IEventManager {
     private int count;
 
     public EventManager() {
-        this.events = new IEvent[200]; // limite arbitrário
+        this.events = new IEvent[200];
         this.count = 0;
     }
 

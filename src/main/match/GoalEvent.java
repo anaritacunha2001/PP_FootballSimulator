@@ -1,6 +1,5 @@
 package main.match;
 
-
 import com.ppstudios.footballmanager.api.contracts.event.IGoalEvent;
 import main.model.IExtendedPlayer;
 
@@ -29,11 +28,12 @@ public class GoalEvent implements IGoalEvent {
     }
 
     @Override
-    public String exportToJson() {
-        return String.format(
+    public void exportToJson() {
+        String json = String.format(
                 "{\"type\": \"goal\", \"minute\": %d, \"player\": \"%s\"}",
                 minute,
                 player.getName()
         );
+        System.out.println(json);
     }
 }

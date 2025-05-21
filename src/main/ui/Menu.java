@@ -8,7 +8,7 @@ import io.Importer;
 import main.league.Season;
 import main.model.Club;
 import main.model.Player;
-import main.simulation.MatchSimulatorStrategy;
+import main.simulation.MatchSimulator;
 
 import java.util.Scanner;
 
@@ -71,7 +71,7 @@ public class Menu {
         int ano = Integer.parseInt(scanner.nextLine());
 
         season = new Season(nome, ano, maxClubes, maxRondas);
-        season.setMatchSimulator(new MatchSimulatorStrategy());
+        season.setMatchSimulator(new MatchSimulator());
         System.out.println("Época criada com sucesso.");
     }
 
