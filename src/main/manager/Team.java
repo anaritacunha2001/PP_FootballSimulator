@@ -1,3 +1,9 @@
+/*
+ * Nome: Ana Rita Dias Cunha
+ * Número: XXXXX
+ * Turma: XXXX
+ */
+
 package main.manager;
 
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
@@ -8,8 +14,14 @@ import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import main.model.IExtendedPlayer;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Team implements ITeam {
+/**
+ * Representa uma equipa com 11 jogadores titulares,
+ * associada a um clube e uma formação tática.
+ */
+public class Team implements ITeam, Serializable {
+    private static final long serialVersionUID = 1L;
 
     private static final int TEAM_SIZE = 11;
 
@@ -43,7 +55,6 @@ public class Team implements ITeam {
         this.formation = formation;
     }
 
-
     @Override
     public IPlayer[] getPlayers() {
         return starters;
@@ -54,7 +65,7 @@ public class Team implements ITeam {
         if (player == null) {
             throw new IllegalArgumentException("Jogador não pode ser null.");
         }
-        if (starterCount >= 11) {
+        if (starterCount >= TEAM_SIZE) {
             throw new IllegalStateException("Equipa já tem 11 titulares.");
         }
         if (formation == null) {
@@ -71,7 +82,6 @@ public class Team implements ITeam {
         starters[starterCount++] = player;
     }
 
-
     @Override
     public int getPositionCount(IPlayerPosition position) {
         if (position == null) {
@@ -80,17 +90,17 @@ public class Team implements ITeam {
 
         int count = 0;
         for (int i = 0; i < starterCount; i++) {
-            if (starters[i] != null && starters[i].getPosition().getDescription().equals(position.getDescription())) {
+            if (starters[i] != null &&
+                    starters[i].getPosition().getDescription().equals(position.getDescription())) {
                 count++;
             }
         }
         return count;
     }
 
-
     @Override
     public boolean isValidPositionForFormation(IPlayerPosition position) {
-        return true;
+        return true; // lógica simplificada
     }
 
     @Override
@@ -109,12 +119,12 @@ public class Team implements ITeam {
                 total += p.getReflexes();
             }
         }
-        return total / (starterCount*7);
+        return total / (starterCount * 7);
     }
 
     @Override
     public void exportToJson() throws IOException {
-        System.out.println("{\"club\": \"" + club.getName() + "\", \"formation\": \"" + formation.getDisplayName() + "\"}");
+        System.out.println("{\"club\": \"" + club.getName() +
+                "\", \"formation\": \"" + formation.getDisplayName() + "\"}");
     }
 }
-

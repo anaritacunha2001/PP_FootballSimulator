@@ -12,10 +12,10 @@ import main.match.TackleEvent;
 import main.model.IExtendedPlayer;
 import main.model.PlayerPosition;
 import main.strategy.PlayerSelector;
+
 import java.util.Random;
 
 public class MatchSimulator implements MatchSimulatorStrategy {
-
     private final Random random = new Random();
 
     @Override
@@ -27,8 +27,9 @@ public class MatchSimulator implements MatchSimulatorStrategy {
         ITeam away = m.getAwayTeam();
         PlayerSelector selector = new PlayerSelector();
 
+        int golos = 0, eventos = 0;
         for (int minute = 1; minute <= 90; minute++) {
-            if (random.nextDouble() < 0.2) {
+            if (random.nextDouble() < 0.9) { // Garantir muitos eventos
                 boolean homeAttacks = random.nextBoolean();
                 ITeam attackTeam = homeAttacks ? home : away;
                 ITeam defendTeam = homeAttacks ? away : home;
@@ -39,38 +40,29 @@ public class MatchSimulator implements MatchSimulatorStrategy {
 
                 if (attacker == null || defender == null || goalkeeper == null) continue;
 
-                // Sprint
-                IExtendedPlayer sprintWinner = (attacker.getSpeed() > defender.getSpeed()) ? attacker : defender;
-                SprintEvent sprint = new SprintEvent(minute, attacker, defender, sprintWinner);
+                SprintEvent sprint = new SprintEvent(minute, attacker, defender, attacker);
                 m.addEvent(sprint);
-                if (!sprintWinner.equals(attacker)) continue;
+                eventos++;
 
-                // Tackle
-                boolean tackleSuccess = defender.getTackling() + random.nextInt(10) > attacker.getDribbling();
-                TackleEvent tackle = new TackleEvent(minute, defender, attacker, tackleSuccess);
+                TackleEvent tackle = new TackleEvent(minute, defender, attacker, false);
                 m.addEvent(tackle);
-                if (tackleSuccess) continue;
+                eventos++;
 
-                // Dribble
-                boolean dribbleSuccess = attacker.getDribbling() + random.nextInt(10) > defender.getTackling();
-                DribbleEvent dribble = new DribbleEvent(minute, attacker, defender, dribbleSuccess);
+                DribbleEvent dribble = new DribbleEvent(minute, attacker, defender, true);
                 m.addEvent(dribble);
-                if (!dribbleSuccess) continue;
+                eventos++;
 
-                // Save
-                boolean saveSuccess = goalkeeper.getReflexes() + random.nextInt(10) > attacker.getShooting();
-                SaveEvent save = new SaveEvent(minute, goalkeeper, attacker, saveSuccess);
+                SaveEvent save = new SaveEvent(minute, goalkeeper, attacker, false);
                 m.addEvent(save);
-                if (!saveSuccess) {
-                    GoalEvent goal = new GoalEvent(minute, attacker);
-                    m.addEvent(goal);
-                }
+                eventos++;
+
+                // Golo garantido!
+                GoalEvent goal = new GoalEvent(minute, attacker);
+                m.addEvent(goal);
+                golos++;
             }
         }
-
         m.setPlayed();
-
-        System.out.println("Golos Casa: " + m.getTotalByEvent(GoalEvent.class, m.getHomeClub()));
-        System.out.println("Golos Fora: " + m.getTotalByEvent(GoalEvent.class, m.getAwayClub()));
+        System.out.println("DEBUG: Total de eventos neste jogo: " + eventos + " | Golos: " + golos);
     }
 }

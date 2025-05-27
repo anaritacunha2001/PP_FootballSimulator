@@ -4,6 +4,7 @@ import com.ppstudios.footballmanager.api.contracts.league.IStanding;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
+import io.Exporter;
 import io.Importer;
 import main.league.Season;
 import main.model.Club;
@@ -16,6 +17,7 @@ public class Menu {
 
     private final Scanner scanner = new Scanner(System.in);
     private final Importer importer = new Importer();
+    private final Exporter exporter = new Exporter();
     private Season season;
     private final int maxClubes = 10;
     private final int maxRondas = 5;
@@ -24,36 +26,27 @@ public class Menu {
     public void mostrarMenuPrincipal() {
         int opcao;
         do {
-            System.out.println("\n==== SIMULADOR DE FUTEBOL - PPStudios ====");
-            System.out.println("1. Criar nova época");
-            System.out.println("2. Adicionar clubes");
-            System.out.println("3. Ver plantel da equipa");
-            System.out.println("4. Ver nomes dos clubes");
-            System.out.println("5. Gerar calendário");
-            System.out.println("6. Simular 1 ronda");
-            System.out.println("7. Simular época completa");
-            System.out.println("8. Ver resultados de uma ronda");
-            System.out.println("9. Ver classificação");
-            System.out.println("0. Sair");
-            System.out.print("Escolha uma opção: ");
-
+            mostrarCabecalho();
             opcao = lerOpcao();
-
-            switch (opcao) {
-                case 1 -> criarEpoca();
-                case 2 -> adicionarClubes();
-                case 3 -> verPlantel();
-                case 4 -> verClubes();
-                case 5 -> gerarCalendario();
-                case 6 -> simularRonda();
-                case 7 -> simularEpocaCompleta();
-                case 8 -> verResultadosRonda();
-                case 9 -> verClassificacao();
-                case 0 -> System.out.println("A sair...");
-                default -> System.out.println("Opção inválida.");
-            }
-
+            tratarOpcao(opcao);
         } while (opcao != 0);
+    }
+
+    private void mostrarCabecalho() {
+        System.out.println("\n==== SIMULADOR DE FUTEBOL - PPStudios ====");
+        System.out.println("1. Criar nova época");
+        System.out.println("2. Adicionar clubes");
+        System.out.println("3. Ver plantel da equipa");
+        System.out.println("4. Ver nomes dos clubes");
+        System.out.println("5. Gerar calendário");
+        System.out.println("6. Simular 1 ronda");
+        System.out.println("7. Simular época completa");
+        System.out.println("8. Ver resultados de uma ronda");
+        System.out.println("9. Ver classificação");
+        System.out.println("10. Ver todos os eventos de um jogo");
+        System.out.println("11. Ver histórico de resultados da época");
+        System.out.println("0. Sair");
+        System.out.print("Escolha uma opção: ");
     }
 
     private int lerOpcao() {
@@ -61,6 +54,24 @@ public class Menu {
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
             return -1;
+        }
+    }
+
+    private void tratarOpcao(int opcao) {
+        switch (opcao) {
+            case 1 -> criarEpoca();
+            case 2 -> adicionarClubes();
+            case 3 -> verPlantel();
+            case 4 -> verClubes();
+            case 5 -> gerarCalendario();
+            case 6 -> simularRonda();
+            case 7 -> simularEpocaCompleta();
+            case 8 -> verResultadosRonda();
+            case 9 -> verClassificacao();
+            case 10 -> verEventosDeJogo();
+            case 11 -> verHistoricoResultados();
+            case 0 -> System.out.println("A sair...");
+            default -> System.out.println("Opção inválida.");
         }
     }
 
@@ -78,14 +89,30 @@ public class Menu {
     private void adicionarClubes() {
         Club[] clubes = importer.importarClubes("clubs.json");
 
+        System.out.println("\n--- Formações disponíveis ---");
+        System.out.println("1. 4-4-2");
+        System.out.println("2. 4-3-3");
+        System.out.println("3. 3-5-2");
+        System.out.print("Escolha a formação para todos os clubes: ");
+        int formacaoEscolhida = lerOpcao();
+        String formacao;
+        switch (formacaoEscolhida) {
+            case 1 -> formacao = "4-4-2";
+            case 2 -> formacao = "4-3-3";
+            case 3 -> formacao = "3-5-2";
+            default -> {
+                System.out.println("Formação inválida.");
+                return;
+            }
+        }
 
         int adicionados = 0;
         for (IClub club : clubes) {
-            if (season.addClub(club)) {
+            if (season.addClub(club, formacao)) {
                 adicionados++;
             }
         }
-        System.out.println("" + adicionados + " clubes adicionados.");
+        System.out.println(adicionados + " clubes adicionados com formação " + formacao + ".");
     }
 
     private void verPlantel() {
@@ -115,7 +142,6 @@ public class Menu {
                     );
                 }
             }
-
         } else {
             System.out.println("Erro: ficheiro '" + caminho + "' não encontrado ou vazio.");
         }
@@ -130,11 +156,17 @@ public class Menu {
     }
 
     private void gerarCalendario() {
-        if (season != null) {
-            season.generateSchedule();
-            System.out.println("Calendário gerado com sucesso.");
-        } else {
+        if (season == null) {
             System.out.println("Primeiro cria a época e adiciona clubes.");
+            return;
+        }
+
+        try {
+            season.generateSchedule();
+            System.out.println("Calendário gerado com sucesso!\n");
+            season.printFullSchedule();
+        } catch (IllegalStateException e) {
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 
@@ -150,34 +182,56 @@ public class Menu {
             return;
         }
 
-        System.out.println("\n--- Simulação da Ronda " + (rondaAtual + 1) + " ---");
-
-        // Simular a ronda atual
+        System.out.println("\n--- Simulação da Ronda " + (rondaAtual + 1) + " ---\n");
         season.simulateRound();
-
-        IMatch[] jogos = season.getMatches(rondaAtual + 1); // porque o método pode esperar índice 1-based
-
-        for (IMatch match : jogos) {
-            if (match != null) {
-                System.out.println(season.displayMatchResult(match));
-            }
-        }
+        exporter.exportarEpoca(season, "epoca.json");
+        System.out.println("Ronda " + (season.getCurrentRound()) + " simulada com sucesso. Resultados exportados.\n");
     }
 
-
     private void simularEpocaCompleta() {
-        if (season != null) {
-            season.simulateSeason();
-            System.out.println("Época simulada.");
+        if (season == null) {
+            System.out.println("Primeiro cria a época e adiciona clubes.");
+            return;
         }
+
+        if (season.isSeasonComplete()) {
+            System.out.println("A época já está concluída.");
+            return;
+        }
+
+        if (season.getSchedule() == null) {
+            System.out.println("Gera primeiro o calendário antes de simular a época.");
+            return;
+        }
+
+        season.simulateAndPrintSeason();
+        exporter.exportarEpoca(season, "epoca.json");
+        System.out.println("✔ Resultados da época exportados para epoca.json");
     }
 
     private void verResultadosRonda() {
         if (season == null) return;
 
-        System.out.print("Número da ronda (0 a " + (season.getMaxRounds() - 1) + "): ");
-        int ronda = Integer.parseInt(scanner.nextLine());
+        int rondasJogadas = season.getCurrentRound();
+        if (rondasJogadas == 0) {
+            System.out.println("⚠ Ainda não foi simulada nenhuma ronda.");
+            return;
+        }
+
+        System.out.print("Número da ronda (0 a " + (rondasJogadas - 1) + "): ");
+        int ronda = lerOpcao();
+        if (ronda < 0 || ronda >= rondasJogadas) {
+            System.out.println("⚠ Essa ronda ainda não foi simulada.");
+            return;
+        }
+
         IMatch[] jogos = season.getMatches(ronda);
+        if (jogos.length == 0) {
+            System.out.println("⚠ Nenhum jogo encontrado para essa ronda.");
+            return;
+        }
+
+        System.out.println("\n== Resultados da Ronda " + ronda + " ==");
         for (IMatch match : jogos) {
             if (match != null) {
                 System.out.println(season.displayMatchResult(match));
@@ -193,6 +247,49 @@ public class Menu {
         for (IStanding s : tabela) {
             if (s != null && s.getTeam() != null) {
                 System.out.println(s.getTeam().getClub().getName() + " - " + s.getPoints() + " pts");
+            }
+        }
+    }
+
+    private void verEventosDeJogo() {
+        if (season == null) return;
+
+        int rondasJogadas = season.getCurrentRound();
+        if (rondasJogadas == 0) {
+            System.out.println("⚠ Ainda não foi simulada nenhuma ronda.");
+            return;
+        }
+
+        System.out.print("Número da ronda (0 a " + (rondasJogadas - 1) + "): ");
+        int ronda = lerOpcao();
+        if (ronda < 0 || ronda >= rondasJogadas) {
+            System.out.println("⚠ Essa ronda ainda não foi simulada.");
+            return;
+        }
+
+        IMatch[] jogos = season.getMatches(ronda);
+        if (jogos.length == 0) {
+            System.out.println("⚠ Nenhum jogo encontrado para essa ronda.");
+            return;
+        }
+
+        System.out.println("\n== Eventos Detalhados da Ronda " + ronda + " ==");
+        for (IMatch match : jogos) {
+            System.out.println("\n--- " + match.getHomeClub().getName() + " vs " + match.getAwayClub().getName() + " ---");
+            for (var evento : match.getEvents()) {
+                System.out.println(" - " + evento);
+            }
+        }
+    }
+
+    private void verHistoricoResultados() {
+        if (season == null) return;
+
+        IMatch[] todosOsJogos = season.getMatches();
+        System.out.println("\n--- Histórico de todos os jogos ---");
+        for (IMatch match : todosOsJogos) {
+            if (match != null && match.isPlayed()) {
+                System.out.println(season.displayMatchResult(match));
             }
         }
     }

@@ -1,3 +1,9 @@
+/*
+ * Nome: Ana Rita Dias Cunha
+ * Número: XXXXX
+ * Turma: XXXX
+ */
+
 package main.league;
 
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
@@ -13,12 +19,18 @@ import main.match.Match;
 import main.manager.Team;
 import main.manager.Formation;
 
-public class Season implements ISeason {
+import java.io.Serializable;
+
+/**
+ * Representa uma época desportiva com clubes, equipas, calendário e simulação de jornadas.
+ */
+public class Season implements ISeason, Serializable {
+    private static final long serialVersionUID = 1L;
 
     private final String name;
     private final int year;
-    private final IClub[] clubs;      // Dados brutos
-    private final ITeam[] teams;      // Equipas com formação
+    private final IClub[] clubs;
+    private final ITeam[] teams;
     private final Standing[] standings;
     private int clubCount;
 
@@ -65,20 +77,18 @@ public class Season implements ISeason {
 
     @Override
     public boolean addClub(IClub club) {
+        return addClub(club, "4-4-2");
+    }
+
+    public boolean addClub(IClub club, String formacao) {
         if (club == null || clubCount >= maxTeams) {
             return false;
         }
 
-        // 1) armazenar o IClub
         clubs[clubCount] = club;
-
-        // 2) criar o ITeam com formação 4-4-2 (poderia vir do utilizador)
-        ITeam team = new Team(club, new Formation("4-4-2"));
+        ITeam team = new Team(club, new Formation(formacao));
         teams[clubCount] = team;
-
-        // 3) criar o Standing com esse ITeam
         standings[clubCount] = new Standing(team);
-
         clubCount++;
         return true;
     }
@@ -89,7 +99,6 @@ public class Season implements ISeason {
 
         for (int i = 0; i < clubCount; i++) {
             if (clubs[i].equals(club)) {
-                // shift left
                 for (int j = i; j < clubCount - 1; j++) {
                     clubs[j]     = clubs[j + 1];
                     teams[j]     = teams[j + 1];
@@ -106,14 +115,11 @@ public class Season implements ISeason {
 
     @Override
     public void generateSchedule() {
-        if (clubCount < 2) {
-            throw new IllegalStateException("É necessário pelo menos 2 clubes.");
-        }
-        if (schedule != null && schedule.getAllMatches().length > 0) {
+        if (clubCount < 2) throw new IllegalStateException("É necessário pelo menos 2 clubes.");
+        if (schedule != null && schedule.getAllMatches().length > 0)
             throw new IllegalStateException("Já existe um calendário gerado.");
-        }
 
-        int totalRounds     = clubCount - 1;
+        int totalRounds = clubCount - 1;
         int matchesPerRound = clubCount / 2;
         schedule = new Schedule(totalRounds, matchesPerRound);
 
@@ -125,19 +131,14 @@ public class Season implements ISeason {
                 int away = (clubCount - 1 - i + round) % clubCount;
                 if (home == away) continue;
 
-                // cria o jogo com os IClub
                 Match m = new Match(clubs[home], clubs[away], round + 1);
-                // atribui a cada Match as suas ITeam correspondentes
                 m.setTeam(teams[home]);
                 m.setTeam(teams[away]);
-
                 rounds[round][matchIndex++] = m;
             }
         }
         schedule.setInternalRounds(rounds);
     }
-
-
 
     @Override
     public IMatch[] getMatches() {
@@ -151,40 +152,26 @@ public class Season implements ISeason {
 
     @Override
     public void simulateRound() {
-        if (simulator == null || schedule == null || isSeasonComplete()) {
-            return;
-        }
+        if (simulator == null || schedule == null || isSeasonComplete()) return;
 
         IMatch[] matches = schedule.getMatchesForRound(currentRound);
         System.out.println("\n--- Resultados da Ronda " + (currentRound + 1) + " ---");
 
         for (IMatch im : matches) {
             if (im != null && !im.isPlayed()) {
-                // simula o jogo
                 simulator.simulate(im);
-
-                // obtém clubes e golos através de getTotalByEvent()
                 IClub homeClub = im.getHomeClub();
                 IClub awayClub = im.getAwayClub();
                 int homeGoals = im.getTotalByEvent(GameEvent.class, homeClub);
                 int awayGoals = im.getTotalByEvent(GameEvent.class, awayClub);
-
-                // encontra índices no array para actualizar o standing
-                int idxHome = indexOf(homeClub);
-                int idxAway = indexOf(awayClub);
-
-                standings[idxHome].registarResultado(homeGoals, awayGoals);
-                standings[idxAway].registarResultado(awayGoals, homeGoals);
-
-                // imprimir resultado do jogo
+                standings[indexOf(homeClub)].registarResultado(homeGoals, awayGoals);
+                standings[indexOf(awayClub)].registarResultado(awayGoals, homeGoals);
                 System.out.println(displayMatchResult(im));
             }
         }
 
         currentRound++;
     }
-
-
 
     @Override
     public void simulateSeason() {
@@ -206,29 +193,25 @@ public class Season implements ISeason {
     @Override
     public void resetSeason() {
         currentRound = 0;
-        schedule     = null;
+        schedule = null;
     }
 
     @Override
     public String displayMatchResult(IMatch match) {
         if (match == null) return "Jogo inválido.";
         return match.getHomeClub().getName() + " " +
-                match.getTotalByEvent(GameEvent.class, match.getHomeClub()) +
-                " - " +
+                match.getTotalByEvent(GameEvent.class, match.getHomeClub()) + " - " +
                 match.getTotalByEvent(GameEvent.class, match.getAwayClub()) + " " +
                 match.getAwayClub().getName();
     }
 
     @Override
     public void setMatchSimulator(MatchSimulatorStrategy matchSimulatorStrategy) {
-        if (matchSimulatorStrategy != null) {
-            this.simulator = (MatchSimulatorStrategy) matchSimulatorStrategy;
-        }
+        if (matchSimulatorStrategy != null) this.simulator = matchSimulatorStrategy;
     }
 
     @Override
     public IStanding[] getLeagueStandings() {
-        // devolve só os elementos preenchidos
         IStanding[] result = new IStanding[clubCount];
         System.arraycopy(standings, 0, result, 0, clubCount);
         return result;
@@ -300,14 +283,11 @@ public class Season implements ISeason {
             System.out.println("Calendário não gerado ainda.");
             return;
         }
-        int totalRounds = schedule.getNumberOfRounds();
-        for (int round = 0; round < totalRounds; round++) {
+        for (int round = 0; round < schedule.getNumberOfRounds(); round++) {
             System.out.println("Ronda " + (round + 1) + ":");
-            IMatch[] matches = getMatches(round);
-            for (IMatch match : matches) {
-                if (match != null) {
+            for (IMatch match : getMatches(round)) {
+                if (match != null)
                     System.out.println("  " + match.getHomeClub().getName() + " vs " + match.getAwayClub().getName());
-                }
             }
             System.out.println();
         }
@@ -328,8 +308,7 @@ public class Season implements ISeason {
             simulateRound();
             int roundJustPlayed = getCurrentRound() - 1;
             System.out.println("Resultados da Ronda " + (roundJustPlayed + 1) + ":");
-            IMatch[] matches = getMatches(roundJustPlayed);
-            for (IMatch match : matches) {
+            for (IMatch match : getMatches(roundJustPlayed)) {
                 System.out.println("  " + displayMatchResult(match));
             }
             System.out.println();

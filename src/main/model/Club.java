@@ -1,3 +1,9 @@
+/*
+ * Nome: Ana Rita Dias Cunha
+ * Número: XXXXX
+ * Turma: XXXX
+ */
+
 package main.model;
 
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
@@ -5,7 +11,14 @@ import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
 
-public class Club implements IClub {
+import java.io.Serializable;
+
+/**
+ * Representa um clube de futebol, contendo jogadores e informação do clube.
+ * Implementa a interface IClub e é serializável.
+ */
+public class Club implements IClub, Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String name;
     private String code;
@@ -76,7 +89,6 @@ public class Club implements IClub {
         players[playerCount++] = player;
     }
 
-
     @Override
     public boolean isPlayer(IPlayer player) {
         if (player == null) {
@@ -112,7 +124,6 @@ public class Club implements IClub {
             }
         }
     }
-
 
     @Override
     public int getPlayerCount() {
@@ -155,8 +166,6 @@ public class Club implements IClub {
 
         return true;
     }
-
-
 
     @Override
     public void exportToJson() {

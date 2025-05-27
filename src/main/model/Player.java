@@ -1,3 +1,9 @@
+/*
+ * Nome: Ana Rita Dias Cunha
+ * Número: XXXXX
+ * Turma: XXXX
+ */
+
 package main.model;
 
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
@@ -6,9 +12,14 @@ import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
 import main.model.PlayerPosition;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Player implements IExtendedPlayer {
+/**
+ * Representa um jogador de futebol com atributos físicos e técnicos.
+ */
+public class Player implements IExtendedPlayer, Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String name;
     private LocalDate birthDate;

@@ -1,8 +1,21 @@
+/*
+ * Nome: Ana Rita Dias Cunha
+ * Número: XXXXX
+ * Turma: XXXX
+ */
+
 package main.manager;
 
 import com.ppstudios.footballmanager.api.contracts.team.IFormation;
 
-public class Formation implements IFormation {
+import java.io.Serializable;
+
+/**
+ * Representa uma formação tática de uma equipa de futebol.
+ * Permite calcular a vantagem tática contra outra formação.
+ */
+public class Formation implements IFormation, Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String displayName;
 
@@ -41,4 +54,3 @@ public class Formation implements IFormation {
         return displayName;
     }
 }
-

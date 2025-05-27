@@ -1,3 +1,9 @@
+/*
+ * Nome: Ana Rita Dias Cunha
+ * Número: XXXXX
+ * Turma: XXXX
+ */
+
 package main.match;
 
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
@@ -6,7 +12,13 @@ import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 import com.ppstudios.footballmanager.api.contracts.data.IExporter;
 
-public class Match implements IMatch {
+import java.io.Serializable;
+
+/**
+ * Representa um jogo entre dois clubes, incluindo equipas, eventos e resultado.
+ */
+public class Match implements IMatch, Serializable {
+    private static final long serialVersionUID = 1L;
 
     private ITeam homeTeam;
     private ITeam awayTeam;
@@ -104,9 +116,6 @@ public class Match implements IMatch {
         return total;
     }
 
-
-
-
     @Override
     public boolean isValid() {
         return homeTeam != null && awayTeam != null &&
@@ -132,7 +141,6 @@ public class Match implements IMatch {
         return eventCount;
     }
 
-
     @Override
     public void exportToJson() {
         System.out.println("{");
@@ -153,5 +161,4 @@ public class Match implements IMatch {
         System.out.println("  ]");
         System.out.println("}");
     }
-
 }
