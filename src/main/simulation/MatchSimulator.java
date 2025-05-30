@@ -1,3 +1,13 @@
+/*
+ * Nome: Ana Rita Dias Cunha
+ * Número: 8210440
+ * Turma: T1
+ *
+ * Nome: Carlos Barbosa
+ * Número: 8210417
+ * Turma: <Turma do colega de grupo>
+ */
+
 package main.simulation;
 
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
@@ -8,25 +18,25 @@ import main.match.GameEvent;
 import java.util.Random;
 
 /**
- * Simula um jogo lançando entre 0 e 4 golos para cada equipa,
- * gerando um GameEvent de tipo "GOAL" em minutos aleatórios.
+ * Implementação da estratégia de simulação de um jogo de futebol.
+ * Gera aleatoriamente entre 0 e 4 golos por equipa e associa eventos do tipo "GOAL" ao jogo.
  */
 public class MatchSimulator implements MatchSimulatorStrategy {
     private final Random rnd = new Random();
 
     /**
-     * Simula um único jogo:
-     *  - Decide aleatoriamente entre 0 e 4 golos para cada equipa.
-     *  - Sorteia um jogador de cada equipa para marcar cada golo.
-     *  - Regista cada golo como GameEvent no minuto aleatório.
-     *  - Marca o jogo como jogado.
+     * Simula um jogo:
+     * - Gera um número aleatório de golos (0 a 4) para cada equipa.
+     * - Escolhe aleatoriamente jogadores marcadores.
+     * - Gera eventos do tipo "GOAL" com descrição e minuto aleatório.
+     * - Marca o jogo como "jogado".
      */
     @Override
     public void simulate(IMatch match) {
-        int homeGoals = rnd.nextInt(5); // 0 a 4
-        int awayGoals = rnd.nextInt(5); // 0 a 4
+        int homeGoals = rnd.nextInt(5); // Golos da equipa da casa (0 a 4)
+        int awayGoals = rnd.nextInt(5); // Golos da equipa visitante (0 a 4)
 
-        // retira os plantéis das equipas da casa e visitante
+        // Obtem os jogadores de cada equipa
         IPlayer[] homePlayers = match.getHomeTeam().getPlayers();
         IPlayer[] awayPlayers = match.getAwayTeam().getPlayers();
 

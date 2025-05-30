@@ -1,8 +1,22 @@
+/*
+ * Nome: Ana Rita Dias Cunha
+ * Número: 8210440
+ * Turma: T1
+ *
+ * Nome: Carlos Barbosa
+ * Número: 8210417
+ * Turma: <Turma do colega de grupo>
+ */
+
 package main.league;
 
 import com.ppstudios.footballmanager.api.contracts.league.IStanding;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 
+/**
+ * Representa a classificacao de uma equipa durante a epoca.
+ * Guarda estatisticas como pontos, vitorias, empates, derrotas e golos.
+ */
 public class Standing implements IStanding {
 
     private final ITeam team;
@@ -14,9 +28,13 @@ public class Standing implements IStanding {
     private int goalsScored;
     private int goalsConceded;
 
+    /**
+     * Construtor da classe Standing.
+     * @param team equipa associada a esta classificacao
+     */
     public Standing(ITeam team) {
         if (team == null) {
-            throw new IllegalArgumentException("Equipa não pode ser null.");
+            throw new IllegalArgumentException("Equipa n\u00e3o pode ser null.");
         }
         this.team = team;
     }
@@ -86,14 +104,26 @@ public class Standing implements IStanding {
         return goalsScored - goalsConceded;
     }
 
+    /**
+     * Adiciona golos marcados ao total da equipa.
+     */
     public void addGoalsScored(int value) {
         goalsScored += value;
     }
 
+    /**
+     * Adiciona golos sofridos ao total da equipa.
+     */
     public void addGoalsConceded(int value) {
         goalsConceded += value;
     }
 
+    /**
+     * Regista um resultado de jogo, atualizando todas as estatisticas.
+     *
+     * @param marcados  golos marcados pela equipa
+     * @param sofridos  golos sofridos pela equipa
+     */
     public void registarResultado(int marcados, int sofridos) {
         addGoalsScored(marcados);
         addGoalsConceded(sofridos);

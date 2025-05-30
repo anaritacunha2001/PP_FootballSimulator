@@ -1,7 +1,11 @@
 /*
  * Nome: Ana Rita Dias Cunha
- * Número: XXXXX
- * Turma: XXXX
+ * Número: 8210440
+ * Turma: T1
+ *
+ * Nome: Carlos Barbosa
+ * Número: 8210417
+ * Turma: <Turma do colega de grupo>
  */
 
 package main.manager;
@@ -19,6 +23,12 @@ public class Formation implements IFormation, Serializable {
 
     private String displayName;
 
+    /**
+     * Construtor da classe Formation.
+     * Valida se a formação fornecida é suportada.
+     *
+     * @param displayName Nome da formação (ex: "4-4-2").
+     */
     public Formation(String displayName) {
         if (!displayName.equals("4-3-3") &&
                 !displayName.equals("4-4-2") &&
@@ -28,6 +38,12 @@ public class Formation implements IFormation, Serializable {
         this.displayName = displayName;
     }
 
+    /**
+     * Calcula a vantagem tática desta formação em relação à formação adversária.
+     *
+     * @param opponent Formação adversária.
+     * @return 1 se tem vantagem, -1 se tem desvantagem, 0 se for neutra.
+     */
     @Override
     public int getTacticalAdvantage(IFormation opponent) {
         if (opponent == null) {
@@ -49,6 +65,9 @@ public class Formation implements IFormation, Serializable {
         }
     }
 
+    /**
+     * Devolve o nome da formação.
+     */
     @Override
     public String getDisplayName() {
         return displayName;

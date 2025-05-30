@@ -1,7 +1,11 @@
 /*
  * Nome: Ana Rita Dias Cunha
- * Número: XXXXX
- * Turma: XXXX
+ * Número: 8210440
+ * Turma: T1
+ *
+ * Nome: Carlos Barbosa
+ * Número: 8210417
+ * Turma: <Turma do colega de grupo>
  */
 
 package main.model;
@@ -29,6 +33,9 @@ public class Club implements IClub, Serializable {
     private IPlayer[] players;
     private int playerCount;
 
+    /**
+     * Construtor do clube, inicializa todos os atributos.
+     */
     public Club(String name, String code, String country, int foundedYear, String stadiumName, String logo, IPlayer[] players) {
         this.name = name;
         this.code = code;
@@ -75,6 +82,9 @@ public class Club implements IClub, Serializable {
         return this.logo;
     }
 
+    /**
+     * Adiciona um jogador ao clube, caso ainda haja espaço e ele não esteja presente.
+     */
     @Override
     public void addPlayer(IPlayer player) {
         if (player == null) {
@@ -89,6 +99,9 @@ public class Club implements IClub, Serializable {
         players[playerCount++] = player;
     }
 
+    /**
+     * Verifica se o jogador pertence ao clube.
+     */
     @Override
     public boolean isPlayer(IPlayer player) {
         if (player == null) {
@@ -103,6 +116,9 @@ public class Club implements IClub, Serializable {
         return false;
     }
 
+    /**
+     * Remove um jogador do clube, se ele estiver presente.
+     */
     @Override
     public void removePlayer(IPlayer player) {
         if (player == null) {
@@ -130,6 +146,9 @@ public class Club implements IClub, Serializable {
         return this.playerCount;
     }
 
+    /**
+     * Seleciona um jogador do clube com base no seletor e posição dados.
+     */
     @Override
     public IPlayer selectPlayer(IPlayerSelector selector, IPlayerPosition position) {
         if (selector == null || position == null) {
@@ -139,6 +158,9 @@ public class Club implements IClub, Serializable {
         return selector.selectPlayer(this, position);
     }
 
+    /**
+     * Verifica se o clube é válido: deve ter pelo menos 16 jogadores, incluindo pelo menos 1 guarda-redes.
+     */
     @Override
     public boolean isValid() {
         if (players == null || players.length == 0) {
@@ -167,13 +189,17 @@ public class Club implements IClub, Serializable {
         return true;
     }
 
-
+    /**
+     * Exporta informação básica do clube em formato JSON.
+     */
     @Override
     public void exportToJson() {
         System.out.println("{\\\"name\\\":\\\"" + name + "\\\",\\\"code\\\":\\\"" + code + "\\\"}");
     }
 
-    // Dentro da tua classe Club (main.model.Club)
+    /**
+     * Define os jogadores do clube e atualiza a contagem.
+     */
     public void setPlayers(IPlayer[] players) {
         this.players = players;
         this.playerCount = (players != null) ? players.length : 0;

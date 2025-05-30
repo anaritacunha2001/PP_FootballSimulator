@@ -1,3 +1,13 @@
+/*
+ * Nome: Ana Rita Dias Cunha
+ * Número: 8210440
+ * Turma: T1
+ *
+ * Nome: Carlos Barbosa
+ * Número: 8210417
+ * Turma: <Turma do colega de grupo>
+ */
+
 package main.match;
 
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
@@ -8,6 +18,10 @@ import com.ppstudios.footballmanager.api.contracts.data.IExporter;
 
 import java.io.Serializable;
 
+/**
+ * Representa um jogo de futebol entre dois clubes, contendo informações sobre as equipas,
+ * eventos ocorridos e resultados.
+ */
 public class Match implements IMatch, IExporter, Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -18,6 +32,9 @@ public class Match implements IMatch, IExporter, Serializable {
     private boolean played = false;
     private final int round;
 
+    /**
+     * Construtor de um jogo com clubes e ronda definidos.
+     */
     public Match(IClub homeClub, IClub awayClub, int round) {
         if (homeClub == null || awayClub == null)
             throw new IllegalArgumentException("Clubes não podem ser null.");
@@ -26,6 +43,7 @@ public class Match implements IMatch, IExporter, Serializable {
         this.round = round;
     }
 
+    // Getters básicos
     @Override public IClub getHomeClub()                  { return homeClub; }
     @Override public IClub getAwayClub()                  { return awayClub; }
     @Override public ITeam getHomeTeam()                  { return homeTeam; }
@@ -34,7 +52,9 @@ public class Match implements IMatch, IExporter, Serializable {
     @Override public boolean isPlayed()                   { return played; }
     @Override public void setPlayed()                     { this.played = true; }
 
-    /** default IMatch.setTeam() */
+    /**
+     * Associa uma equipa ao jogo, verificando se pertence ao clube certo.
+     */
     @Override
     public void setTeam(ITeam team) {
         if (team == null) throw new IllegalArgumentException("Equipa não pode ser null.");
@@ -47,7 +67,7 @@ public class Match implements IMatch, IExporter, Serializable {
         }
     }
 
-    /** explicit setters to avoid ambiguity */
+    // Setters explícitos para evitar ambiguidades
     public void setHomeTeam(ITeam team) {
         if (team == null || !team.getClub().equals(homeClub))
             throw new IllegalStateException("Equipa não corresponde ao clube da casa.");
@@ -59,12 +79,18 @@ public class Match implements IMatch, IExporter, Serializable {
         this.awayTeam = team;
     }
 
+    /**
+     * Adiciona um evento ao jogo.
+     */
     @Override
     public void addEvent(IEvent event) {
         if (event != null && eventCount < events.length)
             events[eventCount++] = event;
     }
 
+    /**
+     * Devolve os eventos ocorridos no jogo.
+     */
     @Override
     public IEvent[] getEvents() {
         IEvent[] copy = new IEvent[eventCount];
@@ -74,6 +100,9 @@ public class Match implements IMatch, IExporter, Serializable {
 
     @Override public int getEventCount()                 { return eventCount; }
 
+    /**
+     * Calcula o total de eventos do tipo GOAL para o clube indicado.
+     */
     @Override
     public int getTotalByEvent(Class eventClass, IClub club) {
         int total = 0;
@@ -88,15 +117,21 @@ public class Match implements IMatch, IExporter, Serializable {
         return total;
     }
 
+    /**
+     * Determina a equipa vencedora com base nos golos marcados.
+     */
     @Override
     public ITeam getWinner() {
         int hg = getTotalByEvent(null, homeClub);
         int ag = getTotalByEvent(null, awayClub);
         if (hg > ag) return homeTeam;
         if (ag > hg) return awayTeam;
-        return null; // draw
+        return null; // empate
     }
 
+    /**
+     * Verifica se ambas as equipas estão corretamente atribuídas.
+     */
     @Override
     public boolean isValid() {
         return homeTeam != null && awayTeam != null
@@ -104,6 +139,9 @@ public class Match implements IMatch, IExporter, Serializable {
                 && awayTeam.getClub().equals(awayClub);
     }
 
+    /**
+     * Exporta os dados do jogo para formato JSON (simulado via consola).
+     */
     @Override
     public void exportToJson() {
         System.out.println("{");

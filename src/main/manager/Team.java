@@ -1,7 +1,11 @@
 /*
  * Nome: Ana Rita Dias Cunha
- * Número: XXXXX
- * Turma: XXXX
+ * Número: 8210440
+ * Turma: T1
+ *
+ * Nome: Carlos Barbosa
+ * Número: 8210417
+ * Turma: <Turma do colega de grupo>
  */
 
 package main.manager;
@@ -30,6 +34,12 @@ public class Team implements ITeam, Serializable {
     private IPlayer[] starters;
     private int starterCount;
 
+    /**
+     * Construtor da classe Team.
+     *
+     * @param club      Clube a que a equipa pertence.
+     * @param formation Formação tática inicial da equipa.
+     */
     public Team(IClub club, IFormation formation) {
         this.club = club;
         this.formation = formation;
@@ -60,6 +70,11 @@ public class Team implements ITeam, Serializable {
         return starters;
     }
 
+    /**
+     * Adiciona um jogador à equipa titular.
+     *
+     * @param player Jogador a adicionar.
+     */
     @Override
     public void addPlayer(IPlayer player) {
         if (player == null) {
@@ -82,6 +97,11 @@ public class Team implements ITeam, Serializable {
         starters[starterCount++] = player;
     }
 
+    /**
+     * Conta quantos jogadores existem para uma dada posição.
+     *
+     * @param position Posição a verificar.
+     */
     @Override
     public int getPositionCount(IPlayerPosition position) {
         if (position == null) {
@@ -98,11 +118,22 @@ public class Team implements ITeam, Serializable {
         return count;
     }
 
+    /**
+     * Verifica se a posição é válida para a formação atual.
+     *
+     * @param position Posição a validar.
+     * @return true se for válida (sempre true neste caso).
+     */
     @Override
     public boolean isValidPositionForFormation(IPlayerPosition position) {
         return true; // lógica simplificada
     }
 
+    /**
+     * Calcula a força total da equipa com base nos atributos dos jogadores.
+     *
+     * @return valor médio ponderado dos atributos.
+     */
     @Override
     public int getTeamStrength() {
         int total = 0;
@@ -122,6 +153,9 @@ public class Team implements ITeam, Serializable {
         return total / (starterCount * 7);
     }
 
+    /**
+     * Exporta os dados da equipa (simulação via consola).
+     */
     @Override
     public void exportToJson() throws IOException {
         System.out.println("{\"club\": \"" + club.getName() +
