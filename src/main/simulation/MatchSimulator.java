@@ -1,68 +1,62 @@
 package main.simulation;
 
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
-import com.ppstudios.footballmanager.api.contracts.team.ITeam;
+import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy;
-import main.match.DribbleEvent;
-import main.match.GoalEvent;
-import main.match.Match;
-import main.match.SaveEvent;
-import main.match.SprintEvent;
-import main.match.TackleEvent;
-import main.model.IExtendedPlayer;
-import main.model.PlayerPosition;
-import main.strategy.PlayerSelector;
+import main.match.GameEvent;
 
 import java.util.Random;
 
+/**
+ * Simula um jogo lançando entre 0 e 4 golos para cada equipa,
+ * gerando um GameEvent de tipo "GOAL" em minutos aleatórios.
+ */
 public class MatchSimulator implements MatchSimulatorStrategy {
-    private final Random random = new Random();
+    private final Random rnd = new Random();
 
+    /**
+     * Simula um único jogo:
+     *  - Decide aleatoriamente entre 0 e 4 golos para cada equipa.
+     *  - Sorteia um jogador de cada equipa para marcar cada golo.
+     *  - Regista cada golo como GameEvent no minuto aleatório.
+     *  - Marca o jogo como jogado.
+     */
     @Override
     public void simulate(IMatch match) {
-        if (!(match instanceof Match)) return;
+        int homeGoals = rnd.nextInt(5); // 0 a 4
+        int awayGoals = rnd.nextInt(5); // 0 a 4
 
-        Match m = (Match) match;
-        ITeam home = m.getHomeTeam();
-        ITeam away = m.getAwayTeam();
-        PlayerSelector selector = new PlayerSelector();
+        // retira os plantéis das equipas da casa e visitante
+        IPlayer[] homePlayers = match.getHomeTeam().getPlayers();
+        IPlayer[] awayPlayers = match.getAwayTeam().getPlayers();
 
-        int golos = 0, eventos = 0;
-        for (int minute = 1; minute <= 90; minute++) {
-            if (random.nextDouble() < 0.9) { // Garantir muitos eventos
-                boolean homeAttacks = random.nextBoolean();
-                ITeam attackTeam = homeAttacks ? home : away;
-                ITeam defendTeam = homeAttacks ? away : home;
-
-                IExtendedPlayer attacker = (IExtendedPlayer) selector.selectPlayer(attackTeam.getClub(), PlayerPosition.STRIKER);
-                IExtendedPlayer defender = (IExtendedPlayer) selector.selectPlayer(defendTeam.getClub(), PlayerPosition.DEFENDER);
-                IExtendedPlayer goalkeeper = (IExtendedPlayer) selector.selectPlayer(defendTeam.getClub(), PlayerPosition.GOALKEEPER);
-
-                if (attacker == null || defender == null || goalkeeper == null) continue;
-
-                SprintEvent sprint = new SprintEvent(minute, attacker, defender, attacker);
-                m.addEvent(sprint);
-                eventos++;
-
-                TackleEvent tackle = new TackleEvent(minute, defender, attacker, false);
-                m.addEvent(tackle);
-                eventos++;
-
-                DribbleEvent dribble = new DribbleEvent(minute, attacker, defender, true);
-                m.addEvent(dribble);
-                eventos++;
-
-                SaveEvent save = new SaveEvent(minute, goalkeeper, attacker, false);
-                m.addEvent(save);
-                eventos++;
-
-                // Golo garantido!
-                GoalEvent goal = new GoalEvent(minute, attacker);
-                m.addEvent(goal);
-                golos++;
-            }
+        // Gera eventos de golo para a equipa da casa
+        for (int i = 0; i < homeGoals; i++) {
+            int minute = rnd.nextInt(90) + 1;
+            IPlayer scorer = homePlayers[rnd.nextInt(homePlayers.length)];
+            match.addEvent(new GameEvent(
+                    minute,
+                    scorer.getName() + " marcou",
+                    "GOAL",
+                    scorer,
+                    match.getHomeTeam()
+            ));
         }
-        m.setPlayed();
-        System.out.println("DEBUG: Total de eventos neste jogo: " + eventos + " | Golos: " + golos);
+
+        // Gera eventos de golo para a equipa visitante
+        for (int i = 0; i < awayGoals; i++) {
+            int minute = rnd.nextInt(90) + 1;
+            IPlayer scorer = awayPlayers[rnd.nextInt(awayPlayers.length)];
+            match.addEvent(new GameEvent(
+                    minute,
+                    scorer.getName() + " marcou",
+                    "GOAL",
+                    scorer,
+                    match.getAwayTeam()
+            ));
+        }
+
+        // Marca o jogo como jogado
+        match.setPlayed();
     }
 }

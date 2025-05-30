@@ -167,8 +167,16 @@ public class Club implements IClub, Serializable {
         return true;
     }
 
+
     @Override
     public void exportToJson() {
         System.out.println("{\\\"name\\\":\\\"" + name + "\\\",\\\"code\\\":\\\"" + code + "\\\"}");
     }
+
+    // Dentro da tua classe Club (main.model.Club)
+    public void setPlayers(IPlayer[] players) {
+        this.players = players;
+        this.playerCount = (players != null) ? players.length : 0;
+    }
+
 }

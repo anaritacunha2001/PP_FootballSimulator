@@ -80,11 +80,11 @@
         "dribbling": 65
     },
     {
-        "name": "M\u00e9dio 6 estrelaamadora",
+        "name": "Medio 6 estrelaamadora",
         "position": "MIDFIELDER",
         "number": 6,
         "nationality": "Portugal",
-        "photo": "images/m\u00e9dio_6_estrelaamadora.png",
+        "photo": "images/medio_6_estrelaamadora.png",
         "passing": 66,
         "shooting": 66,
         "speed": 66,
@@ -96,11 +96,11 @@
         "dribbling": 60
     },
     {
-        "name": "M\u00e9dio 7 estrelaamadora",
+        "name": "Medio 7 estrelaamadora",
         "position": "MIDFIELDER",
         "number": 7,
         "nationality": "Portugal",
-        "photo": "images/m\u00e9dio_7_estrelaamadora.png",
+        "photo": "images/medio_7_estrelaamadora.png",
         "passing": 67,
         "shooting": 60,
         "speed": 67,
@@ -112,11 +112,11 @@
         "dribbling": 61
     },
     {
-        "name": "M\u00e9dio 8 estrelaamadora",
+        "name": "Medio 8 estrelaamadora",
         "position": "MIDFIELDER",
         "number": 8,
         "nationality": "Portugal",
-        "photo": "images/m\u00e9dio_8_estrelaamadora.png",
+        "photo": "images/medio_8_estrelaamadora.png",
         "passing": 68,
         "shooting": 61,
         "speed": 60,
@@ -128,11 +128,11 @@
         "dribbling": 62
     },
     {
-        "name": "Avan\u00e7ado 9 estrelaamadora",
+        "name": "Avancado 9 estrelaamadora",
         "position": "STRIKER",
         "number": 9,
         "nationality": "Portugal",
-        "photo": "images/avan\u00e7ado_9_estrelaamadora.png",
+        "photo": "images/avancado_9_estrelaamadora.png",
         "passing": 69,
         "shooting": 62,
         "speed": 61,
@@ -144,11 +144,11 @@
         "dribbling": 63
     },
     {
-        "name": "Avan\u00e7ado 10 estrelaamadora",
+        "name": "Avancado 10 estrelaamadora",
         "position": "STRIKER",
         "number": 10,
         "nationality": "Portugal",
-        "photo": "images/avan\u00e7ado_10_estrelaamadora.png",
+        "photo": "images/avancado_10_estrelaamadora.png",
         "passing": 60,
         "shooting": 63,
         "speed": 62,
@@ -160,11 +160,11 @@
         "dribbling": 64
     },
     {
-        "name": "Avan\u00e7ado 11 estrelaamadora",
+        "name": "Avancado 11 estrelaamadora",
         "position": "STRIKER",
         "number": 11,
         "nationality": "Portugal",
-        "photo": "images/avan\u00e7ado_11_estrelaamadora.png",
+        "photo": "images/avancado_11_estrelaamadora.png",
         "passing": 61,
         "shooting": 64,
         "speed": 63,

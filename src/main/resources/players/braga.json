@@ -80,11 +80,11 @@
         "dribbling": 65
     },
     {
-        "name": "M\u00e9dio 6 braga",
+        "name": "Medio 6 braga",
         "position": "MIDFIELDER",
         "number": 6,
         "nationality": "Portugal",
-        "photo": "images/m\u00e9dio_6_braga.png",
+        "photo": "images/medio_6_braga.png",
         "passing": 66,
         "shooting": 66,
         "speed": 66,
@@ -96,11 +96,11 @@
         "dribbling": 60
     },
     {
-        "name": "M\u00e9dio 7 braga",
+        "name": "Medio 7 braga",
         "position": "MIDFIELDER",
         "number": 7,
         "nationality": "Portugal",
-        "photo": "images/m\u00e9dio_7_braga.png",
+        "photo": "images/medio_7_braga.png",
         "passing": 67,
         "shooting": 60,
         "speed": 67,
@@ -112,11 +112,11 @@
         "dribbling": 61
     },
     {
-        "name": "M\u00e9dio 8 braga",
+        "name": "Medio 8 braga",
         "position": "MIDFIELDER",
         "number": 8,
         "nationality": "Portugal",
-        "photo": "images/m\u00e9dio_8_braga.png",
+        "photo": "images/medio_8_braga.png",
         "passing": 68,
         "shooting": 61,
         "speed": 60,
@@ -128,11 +128,11 @@
         "dribbling": 62
     },
     {
-        "name": "Avan\u00e7ado 9 braga",
+        "name": "Avancado 9 braga",
         "position": "STRIKER",
         "number": 9,
         "nationality": "Portugal",
-        "photo": "images/avan\u00e7ado_9_braga.png",
+        "photo": "images/avancado_9_braga.png",
         "passing": 69,
         "shooting": 62,
         "speed": 61,
@@ -144,11 +144,11 @@
         "dribbling": 63
     },
     {
-        "name": "Avan\u00e7ado 10 braga",
+        "name": "Avancado 10 braga",
         "position": "STRIKER",
         "number": 10,
         "nationality": "Portugal",
-        "photo": "images/avan\u00e7ado_10_braga.png",
+        "photo": "images/avancado_10_braga.png",
         "passing": 60,
         "shooting": 63,
         "speed": 62,
@@ -160,11 +160,11 @@
         "dribbling": 64
     },
     {
-        "name": "Avan\u00e7ado 11 braga",
+        "name": "Avancado 11 braga",
         "position": "STRIKER",
         "number": 11,
         "nationality": "Portugal",
-        "photo": "images/avan\u00e7ado_11_braga.png",
+        "photo": "images/avancado_11_braga.png",
         "passing": 61,
         "shooting": 64,
         "speed": 63,

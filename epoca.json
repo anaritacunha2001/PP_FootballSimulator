@@ -1,7 +1,1211 @@
 [
   {
-    "homeClub": "Sport Lisboa e Benfica",
-    "awayClub": "Futebol Clube do Porto",
+    "homeClub": "Sporting CP",
+    "awayClub": "AVS Futebol SAD",
+    "score": "1 - 1",
+    "events": [
+      {
+        "minute": 35,
+        "description": "Defesa 4 sporting marcou"
+      },
+      {
+        "minute": 35,
+        "description": "Medio 6 avs marcou"
+      }
+    ]
+  },
+  {
+    "homeClub": "SL Benfica",
+    "awayClub": "CF Estrela da Amadora",
+    "score": "4 - 2",
+    "events": [
+      {
+        "minute": 40,
+        "description": "Defesa 5 benfica marcou"
+      },
+      {
+        "minute": 87,
+        "description": "Avancado 11 benfica marcou"
+      },
+      {
+        "minute": 83,
+        "description": "Defesa 5 benfica marcou"
+      },
+      {
+        "minute": 50,
+        "description": "Goleiro benfica marcou"
+      },
+      {
+        "minute": 54,
+        "description": "Medio 6 estrelaamadora marcou"
+      },
+      {
+        "minute": 67,
+        "description": "Goleiro estrelaamadora marcou"
+      }
+    ]
+  },
+  {
+    "homeClub": "FC Porto",
+    "awayClub": "FC Arouca",
+    "score": "2 - 2",
+    "events": [
+      {
+        "minute": 17,
+        "description": "Goleiro fcporto marcou"
+      },
+      {
+        "minute": 46,
+        "description": "Defesa 5 fcporto marcou"
+      },
+      {
+        "minute": 72,
+        "description": "Avancado 10 arouca marcou"
+      },
+      {
+        "minute": 17,
+        "description": "Defesa 2 arouca marcou"
+      }
+    ]
+  },
+  {
+    "homeClub": "SC Braga",
+    "awayClub": "CD Nacional",
+    "score": "1 - 1",
+    "events": [
+      {
+        "minute": 35,
+        "description": "Avancado 9 braga marcou"
+      },
+      {
+        "minute": 74,
+        "description": "Defesa 3 nacional marcou"
+      }
+    ]
+  },
+  {
+    "homeClub": "Vitória SC",
+    "awayClub": "Boavista FC",
+    "score": "4 - 3",
+    "events": [
+      {
+        "minute": 59,
+        "description": "M\u00e9dio 6 vitoriasc marcou"
+      },
+      {
+        "minute": 15,
+        "description": "M\u00e9dio 7 vitoriasc marcou"
+      },
+      {
+        "minute": 35,
+        "description": "M\u00e9dio 8 vitoriasc marcou"
+      },
+      {
+        "minute": 61,
+        "description": "Avan\u00e7ado 11 vitoriasc marcou"
+      },
+      {
+        "minute": 71,
+        "description": "Medio 6 boavista marcou"
+      },
+      {
+        "minute": 15,
+        "description": "Avancado 11 boavista marcou"
+      },
+      {
+        "minute": 59,
+        "description": "Medio 8 boavista marcou"
+      }
+    ]
+  },
+  {
+    "homeClub": "CD Santa Clara",
+    "awayClub": "SC Farense",
+    "score": "1 - 4",
+    "events": [
+      {
+        "minute": 67,
+        "description": "Avan\u00e7ado 11 santaclara marcou"
+      },
+      {
+        "minute": 31,
+        "description": "Avancado 10 farense marcou"
+      },
+      {
+        "minute": 80,
+        "description": "Avancado 11 farense marcou"
+      },
+      {
+        "minute": 12,
+        "description": "Medio 6 farense marcou"
+      },
+      {
+        "minute": 89,
+        "description": "Defesa 4 farense marcou"
+      }
+    ]
+  },
+  {
+    "homeClub": "FC Famalicão",
+    "awayClub": "Gil Vicente FC",
+    "score": "0 - 2",
+    "events": [
+      {
+        "minute": 85,
+        "description": "Avan\u00e7ado 9 gilvicente marcou"
+      },
+      {
+        "minute": 74,
+        "description": "Defesa 5 gilvicente marcou"
+      }
+    ]
+  },
+  {
+    "homeClub": "GD Estoril Praia",
+    "awayClub": "Rio Ave FC",
+    "score": "0 - 2",
+    "events": [
+      {
+        "minute": 51,
+        "description": "Avan\u00e7ado 9 rioave marcou"
+      },
+      {
+        "minute": 29,
+        "description": "Defesa 2 rioave marcou"
+      }
+    ]
+  },
+  {
+    "homeClub": "Casa Pia AC",
+    "awayClub": "Moreirense FC",
+    "score": "4 - 1",
+    "events": [
+      {
+        "minute": 45,
+        "description": "Avancado 10 casapia marcou"
+      },
+      {
+        "minute": 48,
+        "description": "Avancado 10 casapia marcou"
+      },
+      {
+        "minute": 61,
+        "description": "Goleiro casapia marcou"
+      },
+      {
+        "minute": 35,
+        "description": "Medio 6 casapia marcou"
+      },
+      {
+        "minute": 6,
+        "description": "Defesa 5 moreirense marcou"
+      }
+    ]
+  },
+  {
+    "homeClub": "SL Benfica",
+    "awayClub": "Sporting CP",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Porto",
+    "awayClub": "AVS Futebol SAD",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Braga",
+    "awayClub": "CF Estrela da Amadora",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Vitória SC",
+    "awayClub": "FC Arouca",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Santa Clara",
+    "awayClub": "CD Nacional",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Famalicão",
+    "awayClub": "Boavista FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "GD Estoril Praia",
+    "awayClub": "SC Farense",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Casa Pia AC",
+    "awayClub": "Gil Vicente FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Moreirense FC",
+    "awayClub": "Rio Ave FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Porto",
+    "awayClub": "SL Benfica",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Braga",
+    "awayClub": "Sporting CP",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Vitória SC",
+    "awayClub": "AVS Futebol SAD",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Santa Clara",
+    "awayClub": "CF Estrela da Amadora",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Famalicão",
+    "awayClub": "FC Arouca",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "GD Estoril Praia",
+    "awayClub": "CD Nacional",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Casa Pia AC",
+    "awayClub": "Boavista FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Moreirense FC",
+    "awayClub": "SC Farense",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Rio Ave FC",
+    "awayClub": "Gil Vicente FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Braga",
+    "awayClub": "FC Porto",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Vitória SC",
+    "awayClub": "SL Benfica",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Santa Clara",
+    "awayClub": "Sporting CP",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Famalicão",
+    "awayClub": "AVS Futebol SAD",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "GD Estoril Praia",
+    "awayClub": "CF Estrela da Amadora",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Casa Pia AC",
+    "awayClub": "FC Arouca",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Moreirense FC",
+    "awayClub": "CD Nacional",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Rio Ave FC",
+    "awayClub": "Boavista FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Gil Vicente FC",
+    "awayClub": "SC Farense",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Vitória SC",
+    "awayClub": "SC Braga",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Santa Clara",
+    "awayClub": "FC Porto",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Famalicão",
+    "awayClub": "SL Benfica",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "GD Estoril Praia",
+    "awayClub": "Sporting CP",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Casa Pia AC",
+    "awayClub": "AVS Futebol SAD",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Moreirense FC",
+    "awayClub": "CF Estrela da Amadora",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Rio Ave FC",
+    "awayClub": "FC Arouca",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Gil Vicente FC",
+    "awayClub": "CD Nacional",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Farense",
+    "awayClub": "Boavista FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Santa Clara",
+    "awayClub": "Vitória SC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Famalicão",
+    "awayClub": "SC Braga",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "GD Estoril Praia",
+    "awayClub": "FC Porto",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Casa Pia AC",
+    "awayClub": "SL Benfica",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Moreirense FC",
+    "awayClub": "Sporting CP",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Rio Ave FC",
+    "awayClub": "AVS Futebol SAD",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Gil Vicente FC",
+    "awayClub": "CF Estrela da Amadora",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Farense",
+    "awayClub": "FC Arouca",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Boavista FC",
+    "awayClub": "CD Nacional",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Famalicão",
+    "awayClub": "CD Santa Clara",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "GD Estoril Praia",
+    "awayClub": "Vitória SC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Casa Pia AC",
+    "awayClub": "SC Braga",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Moreirense FC",
+    "awayClub": "FC Porto",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Rio Ave FC",
+    "awayClub": "SL Benfica",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Gil Vicente FC",
+    "awayClub": "Sporting CP",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Farense",
+    "awayClub": "AVS Futebol SAD",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Boavista FC",
+    "awayClub": "CF Estrela da Amadora",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Nacional",
+    "awayClub": "FC Arouca",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "GD Estoril Praia",
+    "awayClub": "FC Famalicão",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Casa Pia AC",
+    "awayClub": "CD Santa Clara",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Moreirense FC",
+    "awayClub": "Vitória SC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Rio Ave FC",
+    "awayClub": "SC Braga",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Gil Vicente FC",
+    "awayClub": "FC Porto",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Farense",
+    "awayClub": "SL Benfica",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Boavista FC",
+    "awayClub": "Sporting CP",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Nacional",
+    "awayClub": "AVS Futebol SAD",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Arouca",
+    "awayClub": "CF Estrela da Amadora",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Casa Pia AC",
+    "awayClub": "GD Estoril Praia",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Moreirense FC",
+    "awayClub": "FC Famalicão",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Rio Ave FC",
+    "awayClub": "CD Santa Clara",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Gil Vicente FC",
+    "awayClub": "Vitória SC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Farense",
+    "awayClub": "SC Braga",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Boavista FC",
+    "awayClub": "FC Porto",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Nacional",
+    "awayClub": "SL Benfica",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Arouca",
+    "awayClub": "Sporting CP",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CF Estrela da Amadora",
+    "awayClub": "AVS Futebol SAD",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Moreirense FC",
+    "awayClub": "Casa Pia AC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Rio Ave FC",
+    "awayClub": "GD Estoril Praia",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Gil Vicente FC",
+    "awayClub": "FC Famalicão",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Farense",
+    "awayClub": "CD Santa Clara",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Boavista FC",
+    "awayClub": "Vitória SC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Nacional",
+    "awayClub": "SC Braga",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Arouca",
+    "awayClub": "FC Porto",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CF Estrela da Amadora",
+    "awayClub": "SL Benfica",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "AVS Futebol SAD",
+    "awayClub": "Sporting CP",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Rio Ave FC",
+    "awayClub": "Moreirense FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Gil Vicente FC",
+    "awayClub": "Casa Pia AC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Farense",
+    "awayClub": "GD Estoril Praia",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Boavista FC",
+    "awayClub": "FC Famalicão",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Nacional",
+    "awayClub": "CD Santa Clara",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Arouca",
+    "awayClub": "Vitória SC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CF Estrela da Amadora",
+    "awayClub": "SC Braga",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "AVS Futebol SAD",
+    "awayClub": "FC Porto",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Sporting CP",
+    "awayClub": "SL Benfica",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Gil Vicente FC",
+    "awayClub": "Rio Ave FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Farense",
+    "awayClub": "Moreirense FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Boavista FC",
+    "awayClub": "Casa Pia AC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Nacional",
+    "awayClub": "GD Estoril Praia",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Arouca",
+    "awayClub": "FC Famalicão",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CF Estrela da Amadora",
+    "awayClub": "CD Santa Clara",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "AVS Futebol SAD",
+    "awayClub": "Vitória SC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Sporting CP",
+    "awayClub": "SC Braga",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SL Benfica",
+    "awayClub": "FC Porto",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Farense",
+    "awayClub": "Gil Vicente FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Boavista FC",
+    "awayClub": "Rio Ave FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Nacional",
+    "awayClub": "Moreirense FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Arouca",
+    "awayClub": "Casa Pia AC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CF Estrela da Amadora",
+    "awayClub": "GD Estoril Praia",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "AVS Futebol SAD",
+    "awayClub": "FC Famalicão",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Sporting CP",
+    "awayClub": "CD Santa Clara",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SL Benfica",
+    "awayClub": "Vitória SC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Porto",
+    "awayClub": "SC Braga",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Boavista FC",
+    "awayClub": "SC Farense",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Nacional",
+    "awayClub": "Gil Vicente FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Arouca",
+    "awayClub": "Rio Ave FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CF Estrela da Amadora",
+    "awayClub": "Moreirense FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "AVS Futebol SAD",
+    "awayClub": "Casa Pia AC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Sporting CP",
+    "awayClub": "GD Estoril Praia",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SL Benfica",
+    "awayClub": "FC Famalicão",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Porto",
+    "awayClub": "CD Santa Clara",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Braga",
+    "awayClub": "Vitória SC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Nacional",
+    "awayClub": "Boavista FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Arouca",
+    "awayClub": "SC Farense",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CF Estrela da Amadora",
+    "awayClub": "Gil Vicente FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "AVS Futebol SAD",
+    "awayClub": "Rio Ave FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Sporting CP",
+    "awayClub": "Moreirense FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SL Benfica",
+    "awayClub": "Casa Pia AC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Porto",
+    "awayClub": "GD Estoril Praia",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Braga",
+    "awayClub": "FC Famalicão",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Vitória SC",
+    "awayClub": "CD Santa Clara",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Arouca",
+    "awayClub": "CD Nacional",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CF Estrela da Amadora",
+    "awayClub": "Boavista FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "AVS Futebol SAD",
+    "awayClub": "SC Farense",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Sporting CP",
+    "awayClub": "Gil Vicente FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SL Benfica",
+    "awayClub": "Rio Ave FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Porto",
+    "awayClub": "Moreirense FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Braga",
+    "awayClub": "Casa Pia AC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Vitória SC",
+    "awayClub": "GD Estoril Praia",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Santa Clara",
+    "awayClub": "FC Famalicão",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CF Estrela da Amadora",
+    "awayClub": "FC Arouca",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "AVS Futebol SAD",
+    "awayClub": "CD Nacional",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Sporting CP",
+    "awayClub": "Boavista FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SL Benfica",
+    "awayClub": "SC Farense",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Porto",
+    "awayClub": "Gil Vicente FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "SC Braga",
+    "awayClub": "Rio Ave FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "Vitória SC",
+    "awayClub": "Moreirense FC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "CD Santa Clara",
+    "awayClub": "Casa Pia AC",
+    "score": "0 - 0",
+    "events": [
+    ]
+  },
+  {
+    "homeClub": "FC Famalicão",
+    "awayClub": "GD Estoril Praia",
     "score": "0 - 0",
     "events": [
     ]

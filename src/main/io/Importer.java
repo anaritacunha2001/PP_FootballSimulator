@@ -10,195 +10,145 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Importer {
 
-    public Player[] importarJogadores(String nomeFicheiro) {
-        Player[] jogadores = new Player[30];
-        int contador = 0;
+    /**
+     * Importa todos os clubes de resources/clubs.json
+     */
+    public Club[] importarClubes(String ficheiroClubs) {
+        String json = lerFicheiro(ficheiroClubs);
+        if (json.isBlank()) return new Club[0];
 
-        try {
-            InputStream input = getClass().getClassLoader().getResourceAsStream(nomeFicheiro);
-            if (input == null) {
-                System.out.println("Erro: ficheiro '" + nomeFicheiro + "' não encontrado.");
-                return new Player[0];
-            }
+        // Remove os colchetes externos e divide em blocos de objetos
+        String conteudo = json.replaceAll("^\\s*\\[|\\]\\s*$", "");
+        String[] blocos = conteudo.split("\\},\\s*\\{");
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-            StringBuilder sb = new StringBuilder();
-            String linha;
+        List<Club> lista = new ArrayList<>();
+        for (String raw : blocos) {
+            String bloco = raw;
+            if (!bloco.startsWith("{")) bloco = "{" + bloco;
+            if (!bloco.endsWith("}")) bloco = bloco + "}";
 
-            while ((linha = reader.readLine()) != null) {
-                sb.append(linha.trim());
-            }
-            reader.close();
+            String name    = extrairValorString(bloco, "name");
+            String code    = extrairValorString(bloco, "code");
+            String country = extrairValorString(bloco, "country");
+            int founded    = extrairValorInt(bloco, "founded");
+            String stadium = extrairValorString(bloco, "stadium");
+            String logo    = extrairValorString(bloco, "logo");
 
-            String conteudo = sb.toString();
-
-            if (conteudo.contains("\"squad\"")) {
-                int start = conteudo.indexOf("[");
-                int end = conteudo.lastIndexOf("]");
-                conteudo = conteudo.substring(start + 1, end);
-            } else {
-                conteudo = conteudo.replace("[", "").replace("]", "");
-            }
-
-            String[] entradas = conteudo.split("(?<=\\}),(?=\\{)");
-
-            for (String entrada : entradas) {
-                if (entrada.contains("name")) {
-                    String json = "{" + entrada;
-
-                    String nome = extrairCampo(json, "name");
-                    String nascimento = extrairCampo(json, "birthDate");
-                    String nacionalidade = extrairCampo(json, "nationality");
-                    String posicao = extrairCampo(json, "basePosition");
-                    String foto = extrairCampo(json, "photo");
-                    int numero = Integer.parseInt(extrairCampo(json, "number"));
-
-                    LocalDate data = LocalDate.parse(nascimento);
-                    PlayerPosition pPos = new PlayerPosition(posicao);
-                    PreferredFoot pe = PreferredFoot.Right;
-
-                    jogadores[contador++] = new Player(
-                            nome,
-                            data,
-                            nacionalidade,
-                            numero,
-                            50,
-                            foto,
-                            pPos,
-                            pe,
-                            50,
-                            50,
-                            50,
-                            1.80f,
-                            75f,
-                            50,
-                            50,
-                            50
-                    );
-                }
-            }
-
-        } catch (Exception e) {
-            System.out.println("Erro ao importar jogadores.");
-            e.printStackTrace();
+            lista.add(new Club(name, code, country, founded, stadium, logo, new IPlayer[0]));
         }
 
-        Player[] resultado = new Player[contador];
-        for (int i = 0; i < contador; i++) {
-            resultado[i] = jogadores[i];
-        }
-
-        return resultado;
+        return lista.toArray(new Club[0]);
     }
 
-    private String extrairCampo(String json, String campo) {
-        String[] partes = json.split(",");
-        for (String p : partes) {
-            if (p.contains("\"" + campo + "\"")) {
-                String[] kv = p.split(":", 2);
-                if (kv.length > 1) {
-                    String valor = kv[1].replaceAll("[\"}]", "").trim();
-                    if (campo.equals("number")) {
-                        valor = valor.replaceAll("[^\\d]", "");
-                    }
-                    return valor;
-                }
+    /**
+     * Importa todos os jogadores de resources/players/<ficheiro>
+     */
+    public Player[] importarJogadores(String ficheiroPlayers) {
+        String json = lerFicheiro(ficheiroPlayers);
+        if (json.isBlank()) return new Player[0];
+
+        // Remove colchetes externos e divide em objetos individuais
+        String conteudo = json.replaceAll("^\\s*\\[|\\]\\s*$", "");
+        String[] entradas = conteudo.split("\\},\\s*\\{");
+
+        List<Player> lista = new ArrayList<>();
+        for (String raw : entradas) {
+            String bloco = raw;
+            if (!bloco.startsWith("{")) bloco = "{" + bloco;
+            if (!bloco.endsWith("}")) bloco = bloco + "}";
+
+            String nome        = extrairValorString(bloco, "name");
+            String posicaoStr  = extrairValorString(bloco, "position").toUpperCase();
+            int number         = extrairValorInt(bloco, "number");
+            String nacionalidade = extrairValorString(bloco, "nationality");
+            String photo       = extrairValorString(bloco, "photo");
+
+            // Campos de atributos técnicos (passing, shooting, etc)
+            int passing  = extrairValorInt(bloco, "passing");
+            int shooting = extrairValorInt(bloco, "shooting");
+            int speed    = extrairValorInt(bloco, "speed");
+            int stamina  = extrairValorInt(bloco, "stamina");
+            int height   = extrairValorInt(bloco, "height");
+            int weight   = extrairValorInt(bloco, "weight");
+            int reflexes = extrairValorInt(bloco, "reflexes");
+            int tackling = extrairValorInt(bloco, "tackling");
+            int dribbling= extrairValorInt(bloco, "dribbling");
+
+            // Não há birthDate no JSON; usa data actual
+            LocalDate birthDate = LocalDate.now();
+
+            PlayerPosition pos = new PlayerPosition(posicaoStr);
+            PreferredFoot foot = PreferredFoot.Right;
+
+            lista.add(new Player(
+                    nome,
+                    birthDate,
+                    nacionalidade,
+                    number,
+                    50,           // overall placeholder
+                    photo,
+                    pos,
+                    foot,
+                    passing,
+                    shooting,
+                    speed,
+                    (float) height / 100f,
+                    (float) weight,
+                    stamina,
+                    reflexes,
+                    tackling
+            ));
+        }
+
+        return lista.toArray(new Player[0]);
+    }
+
+    // ---------------- métodos auxiliares ----------------
+
+    private String lerFicheiro(String nomeFicheiro) {
+        try (InputStream in = getClass()
+                .getClassLoader()
+                .getResourceAsStream(nomeFicheiro))
+        {
+            if (in == null) {
+                System.err.println("Erro: ficheiro '" + nomeFicheiro + "' não encontrado.");
+                return "";
             }
+            BufferedReader r = new BufferedReader(new InputStreamReader(in));
+            StringBuilder sb = new StringBuilder();
+            String linha;
+            while ((linha = r.readLine()) != null) {
+                sb.append(linha.trim());
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            System.err.println("Erro ao ler ficheiro '" + nomeFicheiro + "': " + e.getMessage());
+            return "";
+        }
+    }
+
+    private String extrairValorString(String json, String campo) {
+        Pattern p = Pattern.compile("\"" + campo + "\"\\s*:\\s*\"([^\"]*)\"");
+        Matcher m = p.matcher(json);
+        if (m.find()) {
+            return m.group(1);
         }
         return "";
     }
 
-    public String[] importarNomesClubes(String nomeFicheiro) {
-        String[] clubes = new String[50];
-        int contador = 0;
-
-        try {
-            InputStream input = getClass().getClassLoader().getResourceAsStream(nomeFicheiro);
-            if (input == null) {
-                System.out.println("Erro: ficheiro '" + nomeFicheiro + "' não encontrado.");
-                return new String[0];
-            }
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-            StringBuilder sb = new StringBuilder();
-            String linha;
-
-            while ((linha = reader.readLine()) != null) {
-                sb.append(linha.trim());
-            }
-            reader.close();
-
-            String conteudo = sb.toString();
-            String[] entradas = conteudo.split("\\{");
-
-            for (int i = 0; i < entradas.length; i++) {
-                if (entradas[i].contains("name")) {
-                    String bloco = "{" + entradas[i];
-                    String nome = extrairCampo(bloco, "name");
-                    clubes[contador++] = nome;
-                }
-            }
-
-        } catch (Exception e) {
-            System.out.println("Erro ao importar clubes.");
-            e.printStackTrace();
+    private int extrairValorInt(String json, String campo) {
+        Pattern p = Pattern.compile("\"" + campo + "\"\\s*:\\s*(\\d+)");
+        Matcher m = p.matcher(json);
+        if (m.find()) {
+            return Integer.parseInt(m.group(1));
         }
-
-        String[] resultado = new String[contador];
-        for (int i = 0; i < contador; i++) {
-            resultado[i] = clubes[i];
-        }
-
-        return resultado;
-    }
-
-    public Club[] importarClubes(String nomeFicheiro) {
-        Club[] clubes = new Club[20];
-        int contador = 0;
-
-        try {
-            InputStream input = getClass().getClassLoader().getResourceAsStream(nomeFicheiro);
-            if (input == null) {
-                System.out.println("Erro: ficheiro '" + nomeFicheiro + "' não encontrado.");
-                return new Club[0];
-            }
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-            StringBuilder sb = new StringBuilder();
-            String linha;
-
-            while ((linha = reader.readLine()) != null) {
-                sb.append(linha.trim());
-            }
-            reader.close();
-
-            String conteudo = sb.toString();
-            String[] entradas = conteudo.split("\\{");
-
-            for (String entrada : entradas) {
-                if (entrada.contains("name")) {
-                    String bloco = "{" + entrada;
-                    String nome = extrairCampo(bloco, "name");
-                    String code = extrairCampo(bloco, "code");
-                    String country = extrairCampo(bloco, "country");
-                    int founded = Integer.parseInt(extrairCampo(bloco, "founded"));
-                    String stadium = extrairCampo(bloco, "stadium");
-                    String logo = extrairCampo(bloco, "logo");
-
-                    clubes[contador++] = new Club(nome, code, country, founded, stadium, logo, new IPlayer[0]);
-                }
-            }
-
-        } catch (Exception e) {
-            System.out.println("Erro ao importar clubes detalhados.");
-            e.printStackTrace();
-        }
-
-        Club[] resultado = new Club[contador];
-        System.arraycopy(clubes, 0, resultado, 0, contador);
-        return resultado;
+        return 0;
     }
 }
