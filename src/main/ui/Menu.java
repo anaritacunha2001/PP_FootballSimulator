@@ -55,6 +55,7 @@ public class Menu {
             System.out.println("10. Ver todos os eventos de um jogo");
             System.out.println("11. Ver histórico de resultados");
             System.out.println("12. Mostrar output/epocas.json");
+            System.out.println("13. Ver estatísticas por jogador e equipa");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -72,6 +73,7 @@ public class Menu {
                 case "10": verEventosDeJogo(); break;
                 case "11": historicoEpoca(); break;
                 case "12": mostrarEpocasJson(); break;
+                case "13": verEstatisticas(); break;
                 case "0":
                     System.out.println("A sair...");
                     running = false;
@@ -410,6 +412,40 @@ public class Menu {
         }
     }
 
+    private void verEstatisticas() {
+        if (season == null) {
+            System.out.println("Crie primeiro a época.");
+            return;
+        }
+
+        System.out.println("\n--- Estatísticas por equipa ---");
+        for (Club c : clubes) {
+            int totalGolos = 0;
+            for (IMatch m : season.getMatches()) {
+                totalGolos += m.getTotalByEvent(GameEvent.class, c);
+            }
+            System.out.printf("%s: %d golos marcados%n", c.getName(), totalGolos);
+        }
+
+        System.out.println("\n--- Estatísticas por jogador ---");
+        for (Club c : clubes) {
+            Map<String, Integer> golosJogador = new HashMap<>();
+            for (IMatch m : season.getMatches()) {
+                for (var e : m.getEvents()) {
+                    if (e instanceof GameEvent ge && ge.getTeam().getClub().equals(c) && ge.getType().equals("GOAL")) {
+                        String nomeJogador = ge.getPlayer().getName();
+                        golosJogador.put(nomeJogador, golosJogador.getOrDefault(nomeJogador, 0) + 1);
+                    }
+                }
+            }
+            if (!golosJogador.isEmpty()) {
+                System.out.println("\n" + c.getName() + ":");
+                for (var entry : golosJogador.entrySet()) {
+                    System.out.printf(" - %s: %d golos%n", entry.getKey(), entry.getValue());
+                }
+            }
+        }
+    }
 
     private IPlayer[] selectRandomLineup(Club c) {
         IPlayer[] p = c.getPlayers();

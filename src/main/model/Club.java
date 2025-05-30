@@ -5,7 +5,7 @@
  *
  * Nome: Carlos Barbosa
  * Número: 8210417
- * Turma: <Turma do colega de grupo>
+ * Turma: T3
  */
 
 package main.model;

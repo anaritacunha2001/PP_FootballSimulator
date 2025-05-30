@@ -1034,4 +1034,259 @@
       {"round":17,"home":"FC Famalicão","away":"GD Estoril Praia","score":"0-4"}
     ]
   }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 1,
+    "results": [
+      {"round":1,"home":"Sporting CP","away":"AVS Futebol SAD","score":"2-4"},
+      {"round":1,"home":"SL Benfica","away":"CF Estrela da Amadora","score":"2-3"},
+      {"round":1,"home":"FC Porto","away":"FC Arouca","score":"4-3"},
+      {"round":1,"home":"SC Braga","away":"CD Nacional","score":"1-0"},
+      {"round":1,"home":"Vitória SC","away":"Boavista FC","score":"3-2"},
+      {"round":1,"home":"CD Santa Clara","away":"SC Farense","score":"4-2"},
+      {"round":1,"home":"FC Famalicão","away":"Gil Vicente FC","score":"2-1"},
+      {"round":1,"home":"GD Estoril Praia","away":"Rio Ave FC","score":"1-4"},
+      {"round":1,"home":"Casa Pia AC","away":"Moreirense FC","score":"4-1"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 2,
+    "results": [
+      {"round":2,"home":"SL Benfica","away":"Sporting CP","score":"3-0"},
+      {"round":2,"home":"FC Porto","away":"AVS Futebol SAD","score":"0-3"},
+      {"round":2,"home":"SC Braga","away":"CF Estrela da Amadora","score":"3-0"},
+      {"round":2,"home":"Vitória SC","away":"FC Arouca","score":"4-4"},
+      {"round":2,"home":"CD Santa Clara","away":"CD Nacional","score":"3-2"},
+      {"round":2,"home":"FC Famalicão","away":"Boavista FC","score":"4-3"},
+      {"round":2,"home":"GD Estoril Praia","away":"SC Farense","score":"1-0"},
+      {"round":2,"home":"Casa Pia AC","away":"Gil Vicente FC","score":"3-3"},
+      {"round":2,"home":"Moreirense FC","away":"Rio Ave FC","score":"1-3"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 3,
+    "results": [
+      {"round":3,"home":"FC Porto","away":"SL Benfica","score":"3-0"},
+      {"round":3,"home":"SC Braga","away":"Sporting CP","score":"3-4"},
+      {"round":3,"home":"Vitória SC","away":"AVS Futebol SAD","score":"2-0"},
+      {"round":3,"home":"CD Santa Clara","away":"CF Estrela da Amadora","score":"4-3"},
+      {"round":3,"home":"FC Famalicão","away":"FC Arouca","score":"2-1"},
+      {"round":3,"home":"GD Estoril Praia","away":"CD Nacional","score":"2-4"},
+      {"round":3,"home":"Casa Pia AC","away":"Boavista FC","score":"0-0"},
+      {"round":3,"home":"Moreirense FC","away":"SC Farense","score":"3-2"},
+      {"round":3,"home":"Rio Ave FC","away":"Gil Vicente FC","score":"3-0"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 4,
+    "results": [
+      {"round":4,"home":"SC Braga","away":"FC Porto","score":"4-4"},
+      {"round":4,"home":"Vitória SC","away":"SL Benfica","score":"0-2"},
+      {"round":4,"home":"CD Santa Clara","away":"Sporting CP","score":"4-3"},
+      {"round":4,"home":"FC Famalicão","away":"AVS Futebol SAD","score":"4-3"},
+      {"round":4,"home":"GD Estoril Praia","away":"CF Estrela da Amadora","score":"3-2"},
+      {"round":4,"home":"Casa Pia AC","away":"FC Arouca","score":"1-4"},
+      {"round":4,"home":"Moreirense FC","away":"CD Nacional","score":"1-2"},
+      {"round":4,"home":"Rio Ave FC","away":"Boavista FC","score":"0-2"},
+      {"round":4,"home":"Gil Vicente FC","away":"SC Farense","score":"2-4"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 5,
+    "results": [
+      {"round":5,"home":"Vitória SC","away":"SC Braga","score":"3-2"},
+      {"round":5,"home":"CD Santa Clara","away":"FC Porto","score":"4-2"},
+      {"round":5,"home":"FC Famalicão","away":"SL Benfica","score":"4-2"},
+      {"round":5,"home":"GD Estoril Praia","away":"Sporting CP","score":"2-1"},
+      {"round":5,"home":"Casa Pia AC","away":"AVS Futebol SAD","score":"4-4"},
+      {"round":5,"home":"Moreirense FC","away":"CF Estrela da Amadora","score":"0-2"},
+      {"round":5,"home":"Rio Ave FC","away":"FC Arouca","score":"3-1"},
+      {"round":5,"home":"Gil Vicente FC","away":"CD Nacional","score":"1-3"},
+      {"round":5,"home":"SC Farense","away":"Boavista FC","score":"2-4"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 6,
+    "results": [
+      {"round":6,"home":"CD Santa Clara","away":"Vitória SC","score":"2-2"},
+      {"round":6,"home":"FC Famalicão","away":"SC Braga","score":"4-2"},
+      {"round":6,"home":"GD Estoril Praia","away":"FC Porto","score":"4-0"},
+      {"round":6,"home":"Casa Pia AC","away":"SL Benfica","score":"3-3"},
+      {"round":6,"home":"Moreirense FC","away":"Sporting CP","score":"4-4"},
+      {"round":6,"home":"Rio Ave FC","away":"AVS Futebol SAD","score":"0-3"},
+      {"round":6,"home":"Gil Vicente FC","away":"CF Estrela da Amadora","score":"1-1"},
+      {"round":6,"home":"SC Farense","away":"FC Arouca","score":"1-4"},
+      {"round":6,"home":"Boavista FC","away":"CD Nacional","score":"3-1"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 7,
+    "results": [
+      {"round":7,"home":"FC Famalicão","away":"CD Santa Clara","score":"4-3"},
+      {"round":7,"home":"GD Estoril Praia","away":"Vitória SC","score":"1-1"},
+      {"round":7,"home":"Casa Pia AC","away":"SC Braga","score":"3-4"},
+      {"round":7,"home":"Moreirense FC","away":"FC Porto","score":"3-2"},
+      {"round":7,"home":"Rio Ave FC","away":"SL Benfica","score":"2-4"},
+      {"round":7,"home":"Gil Vicente FC","away":"Sporting CP","score":"2-2"},
+      {"round":7,"home":"SC Farense","away":"AVS Futebol SAD","score":"1-0"},
+      {"round":7,"home":"Boavista FC","away":"CF Estrela da Amadora","score":"0-3"},
+      {"round":7,"home":"CD Nacional","away":"FC Arouca","score":"4-3"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 8,
+    "results": [
+      {"round":8,"home":"GD Estoril Praia","away":"FC Famalicão","score":"2-1"},
+      {"round":8,"home":"Casa Pia AC","away":"CD Santa Clara","score":"3-0"},
+      {"round":8,"home":"Moreirense FC","away":"Vitória SC","score":"3-2"},
+      {"round":8,"home":"Rio Ave FC","away":"SC Braga","score":"4-4"},
+      {"round":8,"home":"Gil Vicente FC","away":"FC Porto","score":"4-3"},
+      {"round":8,"home":"SC Farense","away":"SL Benfica","score":"4-4"},
+      {"round":8,"home":"Boavista FC","away":"Sporting CP","score":"0-1"},
+      {"round":8,"home":"CD Nacional","away":"AVS Futebol SAD","score":"2-1"},
+      {"round":8,"home":"FC Arouca","away":"CF Estrela da Amadora","score":"4-4"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 9,
+    "results": [
+      {"round":9,"home":"Casa Pia AC","away":"GD Estoril Praia","score":"0-0"},
+      {"round":9,"home":"Moreirense FC","away":"FC Famalicão","score":"3-0"},
+      {"round":9,"home":"Rio Ave FC","away":"CD Santa Clara","score":"2-0"},
+      {"round":9,"home":"Gil Vicente FC","away":"Vitória SC","score":"2-0"},
+      {"round":9,"home":"SC Farense","away":"SC Braga","score":"2-2"},
+      {"round":9,"home":"Boavista FC","away":"FC Porto","score":"0-1"},
+      {"round":9,"home":"CD Nacional","away":"SL Benfica","score":"1-1"},
+      {"round":9,"home":"FC Arouca","away":"Sporting CP","score":"1-2"},
+      {"round":9,"home":"CF Estrela da Amadora","away":"AVS Futebol SAD","score":"2-0"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 10,
+    "results": [
+      {"round":10,"home":"Moreirense FC","away":"Casa Pia AC","score":"0-3"},
+      {"round":10,"home":"Rio Ave FC","away":"GD Estoril Praia","score":"0-3"},
+      {"round":10,"home":"Gil Vicente FC","away":"FC Famalicão","score":"0-0"},
+      {"round":10,"home":"SC Farense","away":"CD Santa Clara","score":"0-0"},
+      {"round":10,"home":"Boavista FC","away":"Vitória SC","score":"4-0"},
+      {"round":10,"home":"CD Nacional","away":"SC Braga","score":"0-1"},
+      {"round":10,"home":"FC Arouca","away":"FC Porto","score":"1-1"},
+      {"round":10,"home":"CF Estrela da Amadora","away":"SL Benfica","score":"1-4"},
+      {"round":10,"home":"AVS Futebol SAD","away":"Sporting CP","score":"3-3"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 11,
+    "results": [
+      {"round":11,"home":"Rio Ave FC","away":"Moreirense FC","score":"3-2"},
+      {"round":11,"home":"Gil Vicente FC","away":"Casa Pia AC","score":"4-4"},
+      {"round":11,"home":"SC Farense","away":"GD Estoril Praia","score":"4-4"},
+      {"round":11,"home":"Boavista FC","away":"FC Famalicão","score":"1-3"},
+      {"round":11,"home":"CD Nacional","away":"CD Santa Clara","score":"4-1"},
+      {"round":11,"home":"FC Arouca","away":"Vitória SC","score":"2-0"},
+      {"round":11,"home":"CF Estrela da Amadora","away":"SC Braga","score":"1-2"},
+      {"round":11,"home":"AVS Futebol SAD","away":"FC Porto","score":"3-4"},
+      {"round":11,"home":"Sporting CP","away":"SL Benfica","score":"2-3"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 12,
+    "results": [
+      {"round":12,"home":"Gil Vicente FC","away":"Rio Ave FC","score":"4-0"},
+      {"round":12,"home":"SC Farense","away":"Moreirense FC","score":"1-3"},
+      {"round":12,"home":"Boavista FC","away":"Casa Pia AC","score":"0-3"},
+      {"round":12,"home":"CD Nacional","away":"GD Estoril Praia","score":"2-4"},
+      {"round":12,"home":"FC Arouca","away":"FC Famalicão","score":"2-3"},
+      {"round":12,"home":"CF Estrela da Amadora","away":"CD Santa Clara","score":"2-1"},
+      {"round":12,"home":"AVS Futebol SAD","away":"Vitória SC","score":"2-4"},
+      {"round":12,"home":"Sporting CP","away":"SC Braga","score":"3-0"},
+      {"round":12,"home":"SL Benfica","away":"FC Porto","score":"3-0"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 13,
+    "results": [
+      {"round":13,"home":"SC Farense","away":"Gil Vicente FC","score":"1-2"},
+      {"round":13,"home":"Boavista FC","away":"Rio Ave FC","score":"1-2"},
+      {"round":13,"home":"CD Nacional","away":"Moreirense FC","score":"0-0"},
+      {"round":13,"home":"FC Arouca","away":"Casa Pia AC","score":"2-1"},
+      {"round":13,"home":"CF Estrela da Amadora","away":"GD Estoril Praia","score":"2-4"},
+      {"round":13,"home":"AVS Futebol SAD","away":"FC Famalicão","score":"0-2"},
+      {"round":13,"home":"Sporting CP","away":"CD Santa Clara","score":"4-2"},
+      {"round":13,"home":"SL Benfica","away":"Vitória SC","score":"1-4"},
+      {"round":13,"home":"FC Porto","away":"SC Braga","score":"0-0"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 14,
+    "results": [
+      {"round":14,"home":"Boavista FC","away":"SC Farense","score":"2-4"},
+      {"round":14,"home":"CD Nacional","away":"Gil Vicente FC","score":"4-3"},
+      {"round":14,"home":"FC Arouca","away":"Rio Ave FC","score":"2-4"},
+      {"round":14,"home":"CF Estrela da Amadora","away":"Moreirense FC","score":"1-2"},
+      {"round":14,"home":"AVS Futebol SAD","away":"Casa Pia AC","score":"1-0"},
+      {"round":14,"home":"Sporting CP","away":"GD Estoril Praia","score":"4-4"},
+      {"round":14,"home":"SL Benfica","away":"FC Famalicão","score":"2-4"},
+      {"round":14,"home":"FC Porto","away":"CD Santa Clara","score":"1-2"},
+      {"round":14,"home":"SC Braga","away":"Vitória SC","score":"1-3"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 15,
+    "results": [
+      {"round":15,"home":"CD Nacional","away":"Boavista FC","score":"3-4"},
+      {"round":15,"home":"FC Arouca","away":"SC Farense","score":"1-3"},
+      {"round":15,"home":"CF Estrela da Amadora","away":"Gil Vicente FC","score":"4-0"},
+      {"round":15,"home":"AVS Futebol SAD","away":"Rio Ave FC","score":"0-4"},
+      {"round":15,"home":"Sporting CP","away":"Moreirense FC","score":"0-1"},
+      {"round":15,"home":"SL Benfica","away":"Casa Pia AC","score":"4-2"},
+      {"round":15,"home":"FC Porto","away":"GD Estoril Praia","score":"2-4"},
+      {"round":15,"home":"SC Braga","away":"FC Famalicão","score":"0-1"},
+      {"round":15,"home":"Vitória SC","away":"CD Santa Clara","score":"1-3"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 16,
+    "results": [
+      {"round":16,"home":"FC Arouca","away":"CD Nacional","score":"0-4"},
+      {"round":16,"home":"CF Estrela da Amadora","away":"Boavista FC","score":"3-2"},
+      {"round":16,"home":"AVS Futebol SAD","away":"SC Farense","score":"0-1"},
+      {"round":16,"home":"Sporting CP","away":"Gil Vicente FC","score":"2-3"},
+      {"round":16,"home":"SL Benfica","away":"Rio Ave FC","score":"1-2"},
+      {"round":16,"home":"FC Porto","away":"Moreirense FC","score":"2-3"},
+      {"round":16,"home":"SC Braga","away":"Casa Pia AC","score":"1-0"},
+      {"round":16,"home":"Vitória SC","away":"GD Estoril Praia","score":"2-0"},
+      {"round":16,"home":"CD Santa Clara","away":"FC Famalicão","score":"0-1"}
+    ]
+  }
+  {
+    "name": "liga a 21/22",
+    "roundsPlayed": 17,
+    "results": [
+      {"round":17,"home":"CF Estrela da Amadora","away":"FC Arouca","score":"3-1"},
+      {"round":17,"home":"AVS Futebol SAD","away":"CD Nacional","score":"3-1"},
+      {"round":17,"home":"Sporting CP","away":"Boavista FC","score":"4-0"},
+      {"round":17,"home":"SL Benfica","away":"SC Farense","score":"2-3"},
+      {"round":17,"home":"FC Porto","away":"Gil Vicente FC","score":"0-2"},
+      {"round":17,"home":"SC Braga","away":"Rio Ave FC","score":"4-1"},
+      {"round":17,"home":"Vitória SC","away":"Moreirense FC","score":"2-3"},
+      {"round":17,"home":"CD Santa Clara","away":"Casa Pia AC","score":"2-2"},
+      {"round":17,"home":"FC Famalicão","away":"GD Estoril Praia","score":"1-2"}
+    ]
+  }
 ]
